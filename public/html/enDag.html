@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>en dag</title>
+    <link rel="stylesheet" href="../styles/main.min.css">
+</head>
+
+<body>
+    <section id="enDagHelaSkiten">
+
+
+
+
+
+        <section id="kategorierExplained">
+            <div class="flex">
+                <div class="grön färgspan"></div>
+                <div>Jobb</div>
+            </div>
+            <div class="flex">
+                <div class="röd färgspan"></div>
+                <div>Fritid</div>
+            </div>
+            <div class="flex">
+                <div class="gul färgspan"></div>
+                <div>Asviktigt</div>
+            </div>
+        </section>
+
+
+
+
+        <section id="pilar">
+            <div id="pilBak"><-</div>
+            <div id="pilFram">-></div>
+        </section>
+        <section id="enDagContent">
+
+            
+
+            <div class="enDagDagSec föregåendeDag">
+                <div class="dates">14/4</div>
+                <div>Måndag</div>
+                <div class="enDagDagSecEventDiv">
+                    <div class="enDagAddEventButton">+</div>
+
+                </div>
+            </div>
+
+            <div class="enDagDagSec theDay">
+                <div class="dates">14/4</div>
+                <div>Måndag</div>
+                <div class="enDagDagSecEventDiv">
+                    <div class="enDagAddEventButton">+</div>
+
+                </div>
+            </div>
+
+            <div class="enDagDagSec nästaDag">
+                <div class="dates">14/4</div>
+                <div>Måndag</div>
+                <div class="enDagDagSecEventDiv">
+                    <div class="enDagAddEventButton">+</div>
+
+                </div>
+            </div>
+
+
+        </section>
+    </section>
+
+    <template id="addEventTemplate">
+        <section class="" id="addEventInputSec">
+            <div id="addEventRubbe">Event måndag 14/5</div>
+
+            <form action="index.html" method="post">
+                <input type="text" name="rubrik" id="" placeholder="Rubrik">
+                <div>
+                    <label for="kategori">Kategori:</label>
+                    <input type="checkbox" name="jobb" id="">Jobb
+                    <input type="checkbox" name="fritid" id="">Fritid
+                    <input type="checkbox" name="asviktigt" id="">Asviktigt
+                </div>
+                <label for="starttid">Starttid:</label>
+                <input type="time" name="starttid" id=""><br>
+
+                <label for="starttid">Sluttid:</label>
+                <input type="time" name="sluttid" id=""><br>
+
+                <textarea name="merinfo" id="" cols="30" rows="10" placeholder="Mer info"></textarea><br>
+
+                <input type="submit" value="Add event">
+            </form>
+            <div id="closeButton">x</div>
+        </section>
+    </template>
+
+    <script src="../js/enDag.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,153 @@
+* {
+    border: 1px solid black;
+    margin: 0;
+    padding: 0;
+}
+
+#helaSkiten {
+    margin-bottom: 3rem;
+
+
+    #veckoRubbe {
+        display: flex;
+        justify-content: center;
+    }
+
+    #veckoSec {
+        display: flex;
+        justify-content: space-around;
+
+        .dagSec {
+            width: max-content;
+            padding: 0.6rem;
+
+            .dagSecEventDiv {
+                height: fit-content;
+
+                .addEventButton {
+                    width: fit-content;
+                    padding: 0.15rem 0.45rem;
+                    margin: auto;
+                    margin-top: 0.3rem;
+                    border-radius: 10rem;
+                }
+            }
+        }
+    }
+}
+
+#bottomSec {
+    display: flex;
+    gap: 20rem;
+
+    #kategorierExplained {
+        width: fit-content;
+
+        .flex {
+            display: flex;
+            gap: 0.3rem;
+            margin-bottom: 0.4rem;
+
+            .färgspan {
+                height: 1.1rem;
+                width: 1.1rem;
+            }
+        }
+    }
+
+    #addEventInputSec {
+
+        #addEventRubbe {
+
+        }
+    }
+}
+
+
+
+
+.grön {
+    background-color: rgb(124, 209, 124);
+}
+
+.röd {
+    background-color: rgb(255, 144, 144);
+}
+
+.gul {
+    background-color: rgb(253, 245, 136);
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+// enDag
+
+#enDagHelaSkiten {
+    #kategorierExplained {
+        width: fit-content;
+        padding: 1rem 0 0 1rem;
+
+        .flex {
+            display: flex;
+            gap: 0.3rem;
+            margin-bottom: 0.4rem;
+
+            .färgspan {
+                height: 1.1rem;
+                width: 1.1rem;
+            }
+        }
+    }
+
+    #pilar {
+        display: flex;
+        justify-content: center;
+    }
+
+
+    #enDagContent {
+        display: flex;
+        justify-content: space-around;
+        
+
+        .nästaDag {
+            opacity: 0.3;
+            margin-top: 4rem;
+            transform: scale(0.7);
+        }
+
+        .föregåendeDag {
+            opacity: 0.3;
+            margin-top: 4rem;
+            transform: scale(0.7);
+        }
+
+        .enDagDagSec {
+            width: fit-content;
+            
+            #enDagRubbe {
+                display: flex;
+                justify-content: center;
+                gap: 0.5rem;
+            }
+        
+            .enDagDagSecEventDiv {
+                padding-bottom: 3rem;
+                height: fit-content;
+        
+                .enDagAddEventButton {
+                    width: fit-content;
+                    padding: 0.15rem 0.45rem;
+                    margin: auto;
+                    margin-top: 0.3rem;
+                    border-radius: 10rem;
+                }
+            }
+
+            
+        }
+    }
+}
+
