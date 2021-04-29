@@ -11,9 +11,9 @@ $jobbColor: rgb(211, 191, 79);
 $fritidColor: rgb(88, 173, 77);
 $asviktigtColor: rgb(194, 95, 95);
 
-* {
-    border: 1px solid black;
-}
+// * {
+//     border: 1px solid black;
+// }
 
 
 
@@ -263,8 +263,17 @@ $asviktigtColor: rgb(194, 95, 95);
     }
 }
 
+
+
+.valdKategoriEventsSec {
+    border: 2px solid red;
+}
+
+
+
+
 #linearwrap {
-    background: linear-gradient(to right, white, black, white);
+    background: linear-gradient(to right, black, black, white);
     padding-bottom: 1px;
 }
 

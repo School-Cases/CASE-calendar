@@ -6,10 +6,9 @@ const getAllEvents = (req, res) => {
     res.send({data: events});
 }
 
-const removeAllEvents = (req, res) => {
-    console.log("req");
-    const events = EventModel.deleteAllEvents();
-    res.send({data: events});
+const removeAllEvents = () => {
+    EventModel.deleteAllEvents();
+    // res.send({data: events});
 }
 
 const removeEventById = (id) => {

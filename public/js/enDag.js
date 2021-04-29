@@ -282,7 +282,7 @@ kategoriSec.addEventListener("click", (e) => {
             console.log(day);
 
             let appendDay = document.createElement("section");
-            appendDay.id = "valdKategoriEventsSec";
+            appendDay.classList.add("valdKategoriEventsSec");
             document.getElementById("removehehe").appendChild(appendDay);
 
             day.forEach(event => {
