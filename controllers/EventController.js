@@ -1,11 +1,23 @@
 import EventModel from '../models/Events.js';
 
 const getAllEvents = (req, res) => {
+    console.log(req);
     const events = EventModel.findAllEvents();
     res.send({data: events});
 }
 
+const removeAllEvents = (req, res) => {
+    console.log("req");
+    const events = EventModel.deleteAllEvents();
+    res.send({data: events});
+}
+
+const removeEventById = (id) => {
+    EventModel.deleteEventById(id);
+}
+
 const getEventById = (req, res) => {
+    
     const id = req.params.id;
     const event = EventModel.findEventById(id);
     // const event = events.filter(e => e.id === req.params.id);
@@ -18,8 +30,6 @@ const getEventById = (req, res) => {
 
 const createEvent = (req, res) => {
     console.log('create');
-    console.log(req.body);
-
 
     const body = req.body;
 
@@ -37,4 +47,4 @@ const createEvent = (req, res) => {
 
 }
 
-export default { getAllEvents, getEventById, createEvent };
+export default { getAllEvents, getEventById, createEvent, removeAllEvents, removeEventById };

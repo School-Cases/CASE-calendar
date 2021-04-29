@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+$lato: 'Lato',
+sans-serif;
+
+$mainColor: rgb(48, 47, 47);
+$fontColor1: rgb(255, 255, 255);
+
+$jobbColor: rgb(211, 191, 79);
+$fritidColor: rgb(88, 173, 77);
+$asviktigtColor: rgb(194, 95, 95);
+
+// * {
+//     border: 1px solid black;
+// }
+
+header {
+    justify-content: space-between;
+    position: fixed;
+    width: 100vw;
+    font-family: $lato;
+    z-index: 1;
+    height: 3.5rem;
+
+    #logo {
+        font-size: 4.8rem;
+        font-weight: 900;
+        color: $fontColor1;
+        padding-left: 1rem;
+        transform: translateY(-35%);
+    }
+
+    #kategoriSec {
+        color: $fontColor1;
+        font-size: 1.4rem;
+        font-weight: 900;
+        height: 3.5rem;
+        margin-right: 4%;
+
+        .kategorier {
+            align-items: center;
+            justify-content: center;
+            height: 3.5rem;
+            width: 8.5rem;
+
+            div {
+                transform: translateY(-8%);
+            }
+
+            &:hover:not(#ss) {
+                cursor: pointer;
+                animation-name: scaleX;
+                animation-duration: 0.5s;
+                animation-fill-mode: both;
+            }
+        }
+    }
+}
+
+@keyframes scaleX {
+    0% {
+        width: 8.5rem;
+    }
+    100% {
+        width: 9.4rem;
+    }
+}
+
+
+
+.flex {
+    display: flex;
+}
+
+.mainColorBakgrund {
+    background-color: $mainColor;
+}
+
+.jobbBakgrund {
+    background-color: $jobbColor;
+}
+
+.fritidBakgrund {
+    background-color: $fritidColor;
+}
+
+.asviktigtBakgrund {
+    background-color: $asviktigtColor;
+}

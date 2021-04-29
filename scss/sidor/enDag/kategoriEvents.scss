@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+$lato: 'Lato',
+sans-serif;
+
+$mainColor: rgb(48, 47, 47);
+$fontColor1: rgb(255, 255, 255);
+
+$jobbColor: rgb(211, 191, 79);
+$fritidColor: rgb(88, 173, 77);
+$asviktigtColor: rgb(194, 95, 95);
+
+// * {
+//     border: 1px solid black;
+// }
+
+
+#valdKategoriEventsSec {
+
+    #kategori {
+
+    }
+    #valdKategoriEvents {
+
+        section {
+
+            #bajs {
+                width: fit-content;
+            }
+        }
+    }
+}
+
+.flex {
+    display: flex;
+}
+
+
+#linearwrap {
+    background: linear-gradient(to right, white, black, white);
+    padding-bottom: 1px;
+}
+
+#bajs {
+    background: white;
+    padding-bottom: 0.3rem;
+    width: 15rem;
+}
+
+#arrow {
+    transform: rotate(90deg);
+    width: fit-content;
+}
+
+#rubbeSec {
+    display: flex;
+    gap: 0.2rem;
+    margin: 0.09rem 0 0.2rem 0.3rem;
+}
+
+#rubbeBoll {
+    border-radius: 1rem;
+    width: 1.18rem;
+    height: 1.1rem;
+}

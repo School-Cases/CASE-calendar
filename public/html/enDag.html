@@ -7,44 +7,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>en dag</title>
     <link rel="stylesheet" href="../styles/main.min.css">
+    <link rel="stylesheet" href="../styles/header.min.css">
+    <link rel="stylesheet" href="../styles/kategoriEvents.min.css">
+    <link rel="stylesheet" href="../styles/dagarna.min.css">
 </head>
 
-<body>
+<body id="body">
+
+    <header class="flex mainColorBakgrund">
+        <div id="logo">
+            KALENDER
+        </div>
+
+        <section class="flex" id="kategoriSec">
+            <div id="jobbButton" class="kategorier jobbBakgrund flex">
+                <div>JOBB</div>
+            </div>
+            <div id="fritidButton" class="kategorier fritidBakgrund flex">
+                <div>FRITID</div>
+            </div>
+            <div id="asviktigtButton" class="kategorier asviktigtBakgrund flex">
+                <div>ASVIKTIGT</div>
+            </div>
+        </section>
+    </header>
+
     <section id="enDagHelaSkiten">
 
-
-
-
-
-        <section id="kategorierExplained">
-            <div class="flex">
-                <div class="grön färgspan"></div>
-                <div>Jobb</div>
-            </div>
-            <div class="flex">
-                <div class="röd färgspan"></div>
-                <div>Fritid</div>
-            </div>
-            <div class="flex">
-                <div class="gul färgspan"></div>
-                <div>Asviktigt</div>
-            </div>
+        <section class="flex" id="pilarSec">
+            <div class="pilar flex" id="pilBak">
+                <div id="pil1">
+                    <</div> </div> <div class="pilar flex" id="pilFram">
+                        <div id="pil2">></div>
+                </div>
         </section>
 
+        <section class="flex" id="enDagContent">
 
+            <div class="enDagDagSec föreFöregåendeDag">
+                <div class="dates">14/4</div>
+                <div class="veckodag yeYesterdayDay">Måndag</div>
+                <div class="enDagDagSecEventDiv">
+                    <div class="enDagAddEventButton">+</div>
 
-
-        <section id="pilar">
-            <div id="pilBak"><-</div>
-            <div id="pilFram">-></div>
-        </section>
-        <section id="enDagContent">
-
-            
+                </div>
+            </div>
 
             <div class="enDagDagSec föregåendeDag">
                 <div class="dates">14/4</div>
-                <div>Måndag</div>
+                <div class="veckodag yesterdayDay">Måndag</div>
                 <div class="enDagDagSecEventDiv">
                     <div class="enDagAddEventButton">+</div>
 
@@ -53,16 +64,49 @@
 
             <div class="enDagDagSec theDay">
                 <div class="dates">14/4</div>
-                <div>Måndag</div>
-                <div class="enDagDagSecEventDiv">
+                <div class="veckodag todayDay">MÅNDAG</div>
+                <div id="addEventInput"></div>
+                <div id="switchBlackWhite" class="enDagDagSecEventDiv">
                     <div class="enDagAddEventButton">+</div>
+
+                    <!-- <section id="linearwrap">
+                        <div id="bajs">
+                            <div id="eventTime">
+                                13:40 - 14:15
+                            </div>
+                            <div id="rubbeSec">
+                                <div id="rubbeBoll" class="röd">
+
+                                </div>
+                                <div id="eventRubrik">
+                                    Bajsa
+                                </div>
+                                <div id="arrow">
+                                    >
+                                </div>
+                            </div>
+                            <div id="merInfoDiv">
+                                hfakjfshjasf sajfalsjfaslf asjjs sjfajsf jajsajajlasj asd asd f f a
+                                aksfnasjkfajsfnaslfasfj
+                            </div>
+                        </div>
+                    </section> -->
 
                 </div>
             </div>
 
             <div class="enDagDagSec nästaDag">
                 <div class="dates">14/4</div>
-                <div>Måndag</div>
+                <div class="veckodag tomorrowDay">Måndag</div>
+                <div class="enDagDagSecEventDiv">
+                    <div class="enDagAddEventButton">+</div>
+
+                </div>
+            </div>
+
+            <div class="enDagDagSec nästnästaDag">
+                <div class="dates">14/4</div>
+                <div class="veckodag toTomorrowDay">Måndag</div>
                 <div class="enDagDagSecEventDiv">
                     <div class="enDagAddEventButton">+</div>
 
@@ -71,35 +115,203 @@
 
 
         </section>
+
+
     </section>
+
+    <img src="" alt="">
+
 
     <template id="addEventTemplate">
         <section class="" id="addEventInputSec">
+            <div id="closeButton">x</div>
             <div id="addEventRubbe">Event måndag 14/5</div>
 
-            <form action="index.html" method="post">
-                <input type="text" name="rubrik" id="" placeholder="Rubrik">
-                <div>
-                    <label for="kategori">Kategori:</label>
-                    <input type="checkbox" name="jobb" id="">Jobb
-                    <input type="checkbox" name="fritid" id="">Fritid
-                    <input type="checkbox" name="asviktigt" id="">Asviktigt
+            <form action="/create" method="post">
+                <input type="date" name="date" class="hidden" id="dateöh">
+                
+                <div id="inputRubbeDiv">
+                    <input type="text" name="rubrik" id="inputRubbe" placeholder="Rubrik">
                 </div>
-                <label for="starttid">Starttid:</label>
-                <input type="time" name="starttid" id=""><br>
 
-                <label for="starttid">Sluttid:</label>
-                <input type="time" name="sluttid" id=""><br>
+                <div class="flex" id="tidSec">
+                    <div id="tid">Tid:</div>
+                    <input type="time" name="starttid" id="starttid">
+                    <div id="öh">-</div><input type="time" name="sluttid" id="sluttid">
+                </div>
+                <!-- <div id="tidInputDiv">
+                    <label for="starttid">Starttid:</label>
+                    <input type="time" name="starttid" id="">
+                </div>
 
-                <textarea name="merinfo" id="" cols="30" rows="10" placeholder="Mer info"></textarea><br>
+                <div id="tidInputDiv">
+                    <label for="sluttid">Sluttid:</label>
+                    <input type="time" name="sluttid" id="">
+                </div> -->
 
-                <input type="submit" value="Add event">
+                <div id="kategoriRubbe">
+                    Kategori:
+                </div>
+                <div id="inputKategoriDiv">
+                    <div class="flex">
+                        <input type="checkbox" name="jobb" id="">
+                        <div class="dot" id="jobbDot"></div>
+                        <label id="jobbLabel" for="jobb">JOBB</label>
+                        <br>
+                    </div>
+                    <div class="flex">
+                        <input type="checkbox" name="fritid" id="">
+                        <div class="dot" id="fritidDot"></div>
+                        <label id="fritidLabel" for="fritid">FRITID</label>
+                        <br>
+                    </div>
+                    <div class="flex">
+                        <input type="checkbox" name="asviktigt" id="">
+                        <div class="dot" id="asviktigtDot"></div>
+                        <label id="asviktigtLabel" for="asviktigt">ASVIKTIGT</label>
+                    </div>
+                </div>
+
+                <textarea name="merinfo" id="merInfoText" cols="28" rows="5" placeholder="Mer info"></textarea><br>
+
+                <div id="submitDiv"><input type="submit" value="ADD EVENT" id="submitButton"></div>
+
+                
+
             </form>
-            <div id="closeButton">x</div>
+
         </section>
     </template>
 
+    <template id="eventTemplate">
+        <section id="linearwrap">
+            <div id="bajs">
+                <div id="eventTime">
+                    13:40 - 14:15
+                </div>
+                <div id="rubbeSec">
+                    <div id="rubbeBoll" class="röd">
+
+                    </div>
+                    <div id="eventRubrik">
+                        Bajsa
+                    </div>
+                    <div id="arrow">
+                        >
+                    </div>
+                </div>
+                <div id="merInfoDiv">
+                    hfakjfshjasf sajfalsjfaslf asjjs sjfajsf jajsajajlasj asd asd f f a
+                    aksfnasjkfajsfnaslfasfj
+                </div>
+            </div>
+        </section>
+    </template>
+
+
+    <!-- <input type="date" name="date" id="dateöh">
+    <button id="butt">
+        hej
+    </button> -->
+
+
+    <!-- till kategorisec -->
+    <!-- <template id="eventTemplateKategoriSec">
+        <section id="valdKategoriEventsSec">
+            <section class="flex" id="valdKategoriEvents">
+                <section id="linearwrap">
+                    <div id="bajs">
+                        <div id="eventTime">
+                            13:40 - 14:15
+                        </div>
+                        <div id="rubbeSec">
+                            <div id="eventRubrik">
+                                Bajsa
+                            </div>
+                            <div id="arrow">
+                                >
+                            </div>
+                        </div>
+                        <div id="merInfoDiv">
+                            hfakjfshjasf sajfalsjfaslf asjjs sjfajsf jajsajajlasj asd asd f f a
+                            aksfnasjkfajsfnaslfasfj
+                        </div>
+                    </div>
+                </section>
+            </section>
+        </section>
+    </template> -->
+
+    
+
+    <div id="kategoriSecRubbe"></div>
+    
+    <section id="removehehe"></section>
+
+        <!-- <section id="valdKategoriEventsSec">
+            <section class="flex" id="valdKategoriEvents">
+                <section id="linearwrap">
+                    <div id="bajs">
+                        <div id="eventTime">
+                            13:40 - 14:15
+                        </div>
+                        <div id="rubbeSec">
+                            <div id="eventRubrik">
+                                Bajsa
+                            </div>
+                            <div id="arrow">
+                                >
+                            </div>
+                        </div>
+                        <div id="merInfoDiv">
+                            hfakjfshjasf sajfalsjfaslf asjjs sjfajsf jajsajajlasj asd asd f f a
+                            aksfnasjkfajsfnaslfasfj
+                        </div>
+                    </div>
+                </section>
+            </section>
+        </section> -->
+
+
+
+
+    <!-- till dagSec -->
+
+    <!-- <section id="valdKategoriEventsSec">
+        <div id="kategori">
+            Jobb
+        </div>
+        <section class="flex" id="valdKategoriEvents">
+            <section id="linearwrap">
+                <div id="bajs">
+                    <div id="eventTime">
+                        13:40 - 14:15
+                    </div>
+                    <div id="rubbeSec">
+                        <div id="rubbeBoll" class="röd">
+
+                        </div>
+                        <div id="eventRubrik">
+                            Bajsa
+                        </div>
+                        <div id="arrow">
+                            >
+                        </div>
+                    </div>
+                    <div id="merInfoDiv">
+                        hfakjfshjasf sajfalsjfaslf asjjs sjfajsf jajsajajlasj asd asd f f a
+                        aksfnasjkfajsfnaslfasfj
+                    </div>
+                </div>
+            </section>
+        </section>
+    </section> -->
+
+
+
     <script src="../js/enDag.js"></script>
+
+
 </body>
 
 </html>

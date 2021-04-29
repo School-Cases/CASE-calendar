@@ -1,0 +1,296 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+$lato: 'Lato',
+sans-serif;
+
+$mainColor: rgb(48, 47, 47);
+$fontColor1: rgb(255, 255, 255);
+$fontColor2: rgb(85, 84, 84);
+
+$jobbColor: rgb(211, 191, 79);
+$fritidColor: rgb(88, 173, 77);
+$asviktigtColor: rgb(194, 95, 95);
+
+* {
+    border: 1px solid black;
+}
+
+
+
+#enDagHelaSkiten {
+    padding-top: 5rem;
+    font-family: $lato;
+
+    #pilarSec {
+        align-items: center;
+        justify-content: center;
+        gap: 7rem;
+        margin-bottom: 0.5rem;
+
+        .pilar {
+            align-items: center;
+            justify-content: center;
+            color: $fontColor1;
+            background-color: $mainColor;
+            font-size: 2rem;
+            font-weight: 900;
+            border-radius: 1rem;
+            width: 2rem;
+            height: 1.9rem;
+
+            #pil1 {
+                transform: scaleX(0.7);
+                padding-right: 0.3rem;
+                padding-bottom: 0.23rem;
+            }
+
+            #pil2 {
+                transform: scaleX(0.7);
+                padding-left: 0.3rem;
+                padding-bottom: 0.23rem;
+            }
+
+            &:hover {
+                cursor: pointer;
+                background-color: black;
+            }
+        }
+    }
+
+
+    #enDagContent {
+        justify-content: space-around;
+
+        .föreFöregåendeDag {
+            opacity: 0.3;
+            // height: fit-content;
+            transform: scale(0.7);
+        }
+
+        .föregåendeDag {
+            opacity: 0.6;
+            // height: fit-content;
+            transform: scale(0.85);
+        }
+
+        .nästaDag {
+            opacity: 0.6;
+            // height: fit-content;
+            transform: scale(0.85);
+        }
+
+        .nästnästaDag {
+            opacity: 0.3;
+            // height: fit-content;
+            transform: scale(0.7);
+        }
+
+        .enDagDagSec {
+            // border: 1px solid black;
+            border-radius: 0.8rem;
+            width: 15rem;
+            padding: 0.5rem;
+            height: 70vh;
+            background-color: $mainColor;
+
+            .dates {
+                width: fit-content;
+                margin: auto;
+                color: $fontColor1;
+                font-size: 80%;
+                padding-bottom: 0.1rem;
+            }
+
+            .veckodag {
+                width: fit-content;
+                margin: auto;
+                color: $fontColor1;
+                font-weight: 700;
+                font-size: 140%;
+                padding-bottom: 1.3rem;
+            }
+
+            #addEventInput {
+                border-radius: 0.8rem 0.8rem 0.8rem 0.8rem;
+                background-color: white;
+                color: $fontColor2;
+
+                #closeButton {
+                    color: rgb(255, 94, 94);
+                    font-size: 150%;
+                    float: right;
+                    margin-top: -0.5rem;
+                    margin-right: 0.3rem;
+                    transform: scaleX(1.4);
+
+                    &:hover {
+                        cursor: pointer;
+                        color: rgb(253, 0, 0);
+                    }
+                }
+
+                #addEventRubbe {
+                    font-weight: 900;
+                    width: fit-content;
+                    margin: auto;
+                    padding: 0.9rem 0 0.9rem 0;
+                }
+
+                #inputRubbeDiv {
+
+                    #inputRubbe {
+                        border-radius: 1rem;
+                        border-color: $mainColor;
+                        height: 1.5rem;
+                        padding: 0rem 0.7rem;
+                        width: 7rem;
+                        margin-bottom: 1rem;
+                        outline: 0;
+                    }
+                }
+
+                #tidSec {
+                    margin-bottom: 0.7rem;
+
+                    #tid {
+                        margin-right: 0.2rem;
+                        margin-top: 0.23rem;
+                    }
+
+                    input {
+                        border-radius: 0.9rem;
+                        border-width: 0.16rem;
+                        border-color: $mainColor;
+                        padding: 0rem 0.4rem 0.2rem 0.5rem;
+                        outline: 0;
+                    }
+
+                    #öh {
+                        margin: 0.18rem 0.4rem;
+                    }
+                }
+
+                #inputKategoriDiv {
+                    margin-top: 0.4rem;
+                    margin-left: 0.5rem;
+                    margin-bottom: 1rem;
+
+                    .dot {
+                        border-radius: 1rem;
+                        width: 0.6rem;
+                        height: 0.6rem;
+                        margin-top: 0.38rem;
+                        margin-right: 0.1rem;
+                    }
+
+                    #jobbDot {
+                        background-color: $jobbColor;
+                    }
+
+                    #fritidDot {
+                        background-color: $fritidColor;
+                    }
+
+                    #asviktigtDot {
+                        background-color: $asviktigtColor;
+                    }
+
+                    input {
+                        margin-top: 0.3rem;
+                        margin-right: 0.3rem;
+                    }
+                }
+
+                #merInfoText {
+                    margin-bottom: 1rem;
+                    border-radius: 0.3rem;
+                    padding: 0 0.3rem;
+                    border-color: $mainColor;
+                    border-width: 0.16rem;
+                }
+
+                #submitDiv {
+                    width: fit-content;
+                    margin: auto;
+
+                    #submitButton {
+                        border-radius: 2rem;
+                        padding: 0.6rem 0.9rem 0.4rem 0.9rem;
+                        background-color: $mainColor;
+                        color: $fontColor1;
+                        font-weight: 600;
+                        font-size: 110%;
+                        border-width: 0.2rem;
+                        margin-bottom: 0.2rem;
+                        border-color: $mainColor;
+
+                        &:hover {
+                            cursor: pointer;
+                            background-color: $fontColor1;
+                            color: $mainColor;
+                        }
+                    }
+                }
+
+
+
+            }
+
+            .enDagDagSecEventDiv {
+                padding-bottom: 3rem;
+                height: fit-content;
+                border-radius: 0 0 0.8rem 0.8rem;
+
+                .enDagAddEventButton {
+                    border: 0.2rem solid white;
+                    color: $fontColor1;
+                    font-size: 150%;
+                    font-weight: 900;
+                    width: fit-content;
+                    padding: 0rem 0.515rem 0.1rem 0.515rem;
+                    margin: auto;
+                    margin-top: 0.3rem;
+                    border-radius: 9rem;
+
+                    &:hover {
+                        cursor: pointer;
+                        background-color: white;
+                        color: $mainColor;
+                    }
+                }
+            }
+        }
+    }
+}
+
+#linearwrap {
+    background: linear-gradient(to right, white, black, white);
+    padding-bottom: 1px;
+}
+
+// #bajs {
+//     background: white;
+//     padding-bottom: 0.3rem;
+//     width: 15rem;
+// }
+
+// #arrow {
+//     // transform: rotate(90deg);
+//     width: fit-content;
+// }
+
+// #rubbeSec {
+//     display: flex;
+//     gap: 0.2rem;
+//     margin: 0.09rem 0 0.2rem 0.3rem;
+// }
+
+// #rubbeBoll {
+//     border-radius: 1rem;
+//     width: 1.18rem;
+//     height: 1.1rem;
+// }
+
+.flex {
+    display: flex;
+}

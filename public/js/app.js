@@ -62,6 +62,8 @@ let currentWeek = getNumberOfWeek();
 
 const weekNumber = document.getElementById("weekNumber");
 
+
+
 weekNumber.textContent = "v." + currentWeek;
 
 
@@ -72,6 +74,6 @@ pilBak.addEventListener("click", () => {
     currentWeek = currentWeek - 1;
     weekNumber.textContent = "v." + currentWeek;
 
-    
+
 })
 
