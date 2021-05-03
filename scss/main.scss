@@ -1,10 +1,17 @@
 
+@import "base/reset";
 
-* {
-    // border: 1px solid black;
-    margin: 0;
-    padding: 0;
-}
+@import "base/typography";
+
+@import "base/colors";
+
+
+@import "layout/header";
+
+@import "pages/dagarna";
+@import "pages/kategoriEvents";
+@import "pages/showEvent";
+
 
 
 
@@ -71,17 +78,17 @@
 
 
 
-.grön {
-    background-color: rgb(124, 209, 124);
-}
+// .grön {
+//     background-color: rgb(124, 209, 124);
+// }
 
-.röd {
-    background-color: rgb(255, 144, 144);
-}
+// .röd {
+//     background-color: rgb(255, 144, 144);
+// }
 
-.gul {
-    background-color: rgb(253, 245, 136);
-}
+// .gul {
+//     background-color: rgb(253, 245, 136);
+// }
 
 .hidden {
     visibility: hidden;

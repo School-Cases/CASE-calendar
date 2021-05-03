@@ -25,7 +25,7 @@ app.post('/create', EventController.createEvent);
 
 app.get('/deleteAll', EventController.removeAllEvents);
 
-EventController.removeAllEvents();
+// EventController.removeAllEvents();
 
 // EventController.removeEventById(0);
 

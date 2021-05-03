@@ -1,15 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
-$lato: 'Lato',
-sans-serif;
 
-$mainColor: rgb(48, 47, 47);
-$fontColor1: rgb(255, 255, 255);
-$fontColor2: rgb(85, 84, 84);
 
-$jobbColor: rgb(211, 191, 79);
-$fritidColor: rgb(88, 173, 77);
-$asviktigtColor: rgb(194, 95, 95);
 
 // * {
 //     border: 1px solid black;
@@ -107,7 +98,7 @@ $asviktigtColor: rgb(194, 95, 95);
                 color: $fontColor1;
                 font-weight: 700;
                 font-size: 140%;
-                padding-bottom: 1.3rem;
+                padding-bottom: 0.6rem;
             }
 
             #addEventInput {
@@ -237,7 +228,7 @@ $asviktigtColor: rgb(194, 95, 95);
             }
 
             .enDagDagSecEventDiv {
-                padding-bottom: 3rem;
+                padding-bottom: 1rem;
                 height: fit-content;
                 border-radius: 0 0 0.8rem 0.8rem;
 
@@ -272,10 +263,10 @@ $asviktigtColor: rgb(194, 95, 95);
 
 
 
-#linearwrap {
-    background: linear-gradient(to right, black, black, white);
-    padding-bottom: 1px;
-}
+// #linearwrap {
+//     background: linear-gradient(to right, black, black, white);
+//     padding-bottom: 1px;
+// }
 
 // #bajs {
 //     background: white;

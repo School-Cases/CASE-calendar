@@ -7,9 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>en dag</title>
     <link rel="stylesheet" href="../styles/main.min.css">
-    <link rel="stylesheet" href="../styles/header.min.css">
-    <link rel="stylesheet" href="../styles/kategoriEvents.min.css">
-    <link rel="stylesheet" href="../styles/dagarna.min.css">
+    <script src="https://kit.fontawesome.com/e3293ae29a.js" crossorigin="anonymous"></script>
 </head>
 
 <body id="body">
@@ -48,26 +46,30 @@
                 <div class="dates">14/4</div>
                 <div class="veckodag yeYesterdayDay">Måndag</div>
                 <div class="enDagDagSecEventDiv">
-                    <div class="enDagAddEventButton">+</div>
+                    <!-- <div class="enDagAddEventButton">+</div> -->
+                    <div class="EventsPerDay"></div>
+
 
                 </div>
             </div>
 
-            <div class="enDagDagSec föregåendeDag">
+            <div class="enDagDagSec weirdHeight föregåendeDag">
                 <div class="dates">14/4</div>
                 <div class="veckodag yesterdayDay">Måndag</div>
                 <div class="enDagDagSecEventDiv">
-                    <div class="enDagAddEventButton">+</div>
+                    <!-- <div class="enDagAddEventButton">+</div> -->
+                    <div class="EventsPerDay"></div>
 
                 </div>
             </div>
 
             <div class="enDagDagSec theDay">
-                <div class="dates">14/4</div>
+                <div id="todaysDate" class="dates">14/4</div>
                 <div class="veckodag todayDay">MÅNDAG</div>
                 <div id="addEventInput"></div>
                 <div id="switchBlackWhite" class="enDagDagSecEventDiv">
-                    <div class="enDagAddEventButton">+</div>
+                    <div id="addButton" class="enDagAddEventButton">+</div>
+                    <div class="EventsPerDay"></div>
 
                     <!-- <section id="linearwrap">
                         <div id="bajs">
@@ -95,11 +97,12 @@
                 </div>
             </div>
 
-            <div class="enDagDagSec nästaDag">
+            <div class="enDagDagSec nästaDag weirdHeight">
                 <div class="dates">14/4</div>
                 <div class="veckodag tomorrowDay">Måndag</div>
                 <div class="enDagDagSecEventDiv">
-                    <div class="enDagAddEventButton">+</div>
+                    <!-- <div class="enDagAddEventButton">+</div> -->
+                    <div class="EventsPerDay"></div>
 
                 </div>
             </div>
@@ -108,7 +111,8 @@
                 <div class="dates">14/4</div>
                 <div class="veckodag toTomorrowDay">Måndag</div>
                 <div class="enDagDagSecEventDiv">
-                    <div class="enDagAddEventButton">+</div>
+                    <!-- <div class="enDagAddEventButton">+</div> -->
+                    <div class="EventsPerDay"></div>
 
                 </div>
             </div>
@@ -128,8 +132,8 @@
             <div id="addEventRubbe">Event måndag 14/5</div>
 
             <form action="/create" method="post">
-                <input type="date" name="date" class="hidden" id="dateöh">
-                
+                <input type="text" name="date" class="hidden" id="dateöh">
+
                 <div id="inputRubbeDiv">
                     <input type="text" name="rubrik" id="inputRubbe" placeholder="Rubrik">
                 </div>
@@ -154,19 +158,19 @@
                 </div>
                 <div id="inputKategoriDiv">
                     <div class="flex">
-                        <input type="checkbox" name="jobb" id="">
+                        <input type="checkbox" name="jobb" id="jobb">
                         <div class="dot" id="jobbDot"></div>
                         <label id="jobbLabel" for="jobb">JOBB</label>
                         <br>
                     </div>
                     <div class="flex">
-                        <input type="checkbox" name="fritid" id="">
+                        <input type="checkbox" name="fritid" id="fritid">
                         <div class="dot" id="fritidDot"></div>
                         <label id="fritidLabel" for="fritid">FRITID</label>
                         <br>
                     </div>
                     <div class="flex">
-                        <input type="checkbox" name="asviktigt" id="">
+                        <input type="checkbox" name="asviktigt" id="asviktigt">
                         <div class="dot" id="asviktigtDot"></div>
                         <label id="asviktigtLabel" for="asviktigt">ASVIKTIGT</label>
                     </div>
@@ -176,7 +180,7 @@
 
                 <div id="submitDiv"><input type="submit" value="ADD EVENT" id="submitButton"></div>
 
-                
+
 
             </form>
 
@@ -189,8 +193,11 @@
                 <div id="eventTime">
                     13:40 - 14:15
                 </div>
+                <div id="edit">
+                    <i class="fas fa-pencil-alt"></i>
+                </div>
                 <div id="rubbeSec">
-                    <div id="rubbeBoll" class="röd">
+                    <div id="rubbeBoll" class="">
 
                     </div>
                     <div id="eventRubrik">
@@ -200,10 +207,7 @@
                         >
                     </div>
                 </div>
-                <div id="merInfoDiv">
-                    hfakjfshjasf sajfalsjfaslf asjjs sjfajsf jajsajajlasj asd asd f f a
-                    aksfnasjkfajsfnaslfasfj
-                </div>
+                <div class="hidden" id="merInfoDiv"></div>
             </div>
         </section>
     </template>
@@ -242,13 +246,13 @@
         </section>
     </template> -->
 
-    
+
 
     <div id="kategoriSecRubbe"></div>
 
     <section id="removehehe"></section>
 
-        <!-- <section id="valdKategoriEventsSec">
+    <!-- <section id="valdKategoriEventsSec">
             <section class="flex" id="valdKategoriEvents">
                 <section id="linearwrap">
                     <div id="bajs">

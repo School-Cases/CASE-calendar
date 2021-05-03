@@ -27,6 +27,7 @@ const findEventById = (id) => {
 
 const createEvent = (body) => {
     // return products.find(prod => prod.id === id);
+    console.log(body);
 
     try {
         const newEvent = {

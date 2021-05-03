@@ -4,16 +4,131 @@
 // const url = "../../data/events.json";
 const url = "../data/events.json";
 
-fetch(url).then((response) => response.json()).then((events) => {
-    console.log(events)
-});
 
+const eventTemplate = document.getElementById("eventTemplate");
 
+// const EventsPerDay = document.getElementById("EventsPerDay");
 
 const addEventTemplate = document.getElementById("addEventTemplate");
 
 
+const allDayDivs = document.querySelectorAll(".enDagDagSec");
+
 let dates = document.querySelectorAll(".dates");
+let EventsPerDay = document.querySelectorAll(".EventsPerDay");
+const todaysDate = document.getElementById("todaysDate");
+
+const getTheEvents = () => {
+    fetch(url).then((response) => response.json()).then((events) => {
+        EventsPerDay.forEach(day => {
+            day.innerHTML = "";
+        })
+        allDayDivs.forEach(date => {
+            let thisDaysEvents = events.filter((event) => {
+                return event.date === date.getAttribute('data-date');
+            })
+
+            thisDaysEvents.forEach(dayEvent => {
+
+                let clone = eventTemplate.content.cloneNode(true);
+                clone.getElementById("eventTime").textContent = `${dayEvent.starttid} - ${dayEvent.sluttid}`;
+                if (dayEvent.jobb) {
+                    clone.getElementById("rubbeBoll").style.backgroundColor = "rgb(211, 191, 79)";
+                } else if (dayEvent.fritid) {
+                    clone.getElementById("rubbeBoll").style.backgroundColor = "rgb(88, 173, 77)";
+                } else if (dayEvent.asviktigt) {
+                    clone.getElementById("rubbeBoll").style.backgroundColor = "rgb(194, 95, 95)";
+                } else {
+                    clone.getElementById("rubbeBoll").style.backgroundColor = "grey";
+                }
+                clone.getElementById("eventRubrik").textContent = `${dayEvent.rubrik}`;
+
+
+                clone.getElementById("merInfoDiv").textContent = ``;
+
+
+                let switchMerInfo = false;
+                clone.getElementById("arrow").addEventListener("click", (e) => {
+                    if (switchMerInfo === false) {
+                        e.target.style.transform = "rotate(90deg)";
+                        let InfoDiven = e.target.parentNode.nextSibling.nextSibling;
+                        InfoDiven.innerHTML = `<i>${dayEvent.merInfo}</i>`;
+                        InfoDiven.classList.remove("hidden");
+                        switchMerInfo = true;
+                    } else {
+                        console.log('hej');
+                        e.target.style.transform = "rotate(0deg)";
+                        let InfoDiven = e.target.parentNode.nextSibling.nextSibling;
+                        InfoDiven.innerHTML = ``;
+                        InfoDiven.classList.add("hidden");
+                        switchMerInfo = false;
+                    }
+
+                        
+
+                })
+
+                clone.getElementById("edit").addEventListener("click", (e) => {
+                    console.log(clone);
+                    console.log(e.target.closest("#bajs"));
+                    e.target.closest("#bajs").remove();
+
+                    
+                    
+                        console.log(dayEvent);
+                        let formClone = addEventTemplate.content.cloneNode(true);
+                        theDay.children[2].appendChild(formClone);
+                        const closeButton = document.getElementById("closeButton");
+                        addSwitch = true;
+                        addEventInput.style.padding = "0.3rem";
+                        switchBlackWhite.style.backgroundColor = "rgb(48, 47, 47)";
+                        switchBlackWhite.style.paddingBottom = "0";
+                        enDagAddEventButton.style.visibility = "hidden";
+
+
+                        // document.getElementById("addEventRubbe").value = dayEvent.date;
+                        document.getElementById("dateöh").value = dayEvent.date;
+                        document.getElementById("inputRubbe").value = dayEvent.rubrik;
+                        document.getElementById("starttid").value = dayEvent.starttid;
+                        document.getElementById("sluttid").value = dayEvent.sluttid;
+                        if (dayEvent.jobb) {
+                            document.getElementById("jobb").checked = "true";
+                        } else if (dayEvent.fritid) {
+                            document.getElementById("fritid").checked = "true";
+                        } else if (dayEvent.asviktigt) {
+                            document.getElementById("asviktigt").checked = "true";
+                        }
+                        document.getElementById("merInfoText").value = dayEvent.merInfo;
+                        document.getElementById("submitButton").value = "UPPDATERA";
+
+                        document.getElementById("addEventRubbe").textContent = "Uppdatera event " + dayEvent.date;
+
+                        closeButton.remove();
+
+                })
+
+                date.querySelector(".EventsPerDay").appendChild(clone);
+                
+                
+
+
+                
+            })
+            setDayHeight();
+        })
+    });
+}
+
+getTheEvents()
+
+
+
+
+
+
+
+
+
 
 
 let todayDay;
@@ -28,12 +143,14 @@ let today;
 let tomorrow;
 let toTomorrow;
 
+
+
 const setCorrectDateString = () => {
-    dates[0].dataset.date = yeYesterday;
-    dates[1].dataset.date = yesterday;
-    dates[2].dataset.date = today;
-    dates[3].dataset.date = tomorrow;
-    dates[4].dataset.date = toTomorrow;
+    allDayDivs[0].dataset.date = yeYesterday;
+    allDayDivs[1].dataset.date = yesterday;
+    allDayDivs[2].dataset.date = today;
+    allDayDivs[3].dataset.date = tomorrow;
+    allDayDivs[4].dataset.date = toTomorrow;
     let yeYesterdaySplitted = yeYesterday.split("-");
     dates[0].textContent = yeYesterdaySplitted[2] + "/" + yeYesterdaySplitted[1];
     let yesterdaySplitted = yesterday.split("-");
@@ -165,36 +282,24 @@ const setCalendarDatesBak = () => {
     setCorrectDayString();
 };
 
-const allDayDivs = document.querySelectorAll(".enDagDagSec");
 
 const setDayHeight = () => {
     allDayDivs.forEach(div => {
+        // console.log(div);
         let childrenHeight = 0;
         for (let i = 0; i < div.children.length; i++) {
+            // console.log(div.offsetHeight, div.children[i].offsetHeight);
             childrenHeight += div.children[i].offsetHeight;
         }
-        if (div.offsetHeight < childrenHeight + 20) {
+        // console.log(div.offsetHeight, childrenHeight);
+        if (454 < childrenHeight) {
             div.style.height = `fit-content`;
         } else {
             div.style.height = `70vh`;
         };
     })
-
-
-    // if (document.querySelector(".theDay").offsetHeight < document.querySelector(".enDagDagSecEventDiv").offsetHeight + document.querySelector("#addEventInput").offsetHeight) {
-    //     document.querySelector(".theDay").style.height = `fit-content`;
-    // } else {
-    //     document.querySelector(".theDay").style.height = "20rem";
-    // }
 };
 
-// const setMainDayHeight = () => {
-//     if (document.querySelector(".theDay").offsetHeight < document.querySelector(".enDagDagSecEventDiv").offsetHeight + document.querySelector("#addEventInput").offsetHeight) {
-//         document.querySelector(".theDay").style.height = `fit-content`;
-//     } else {
-//         document.querySelector(".theDay").style.height = "20rem";
-//     }
-// };
 
 
 const theDay = document.querySelector(".theDay");
@@ -215,31 +320,55 @@ enDagAddEventButton.addEventListener("click", (e) => {
         switchBlackWhite.style.paddingBottom = "0";
         enDagAddEventButton.style.visibility = "hidden";
         document.getElementById("dateöh").value = today;
+        document.getElementById("addEventRubbe").textContent = "Event " + today;
+        setDayHeight();
         closeButton.addEventListener("click", () => {
             theDay.children[2].removeChild(document.getElementById("addEventInputSec"));
             enDagAddEventButton.textContent = "+";
             addSwitch = false;
-            setDayHeight();
             addEventInput.style.padding = "0";
             switchBlackWhite.style.backgroundColor = "rgb(48, 47, 47)";
             switchBlackWhite.style.paddingBottom = "3rem";
             enDagAddEventButton.style.visibility = "visible";
-            // document.getElementById("dateöh").value = null;
+            setDayHeight();
         })
     } else {
         return;
     }
-    setDayHeight();
 });
 
 const pilFram = document.getElementById("pilFram");
 pilFram.addEventListener("click", () => {
     setCalendarDatesFram();
+    getTheEvents();
+    setDayHeight();
+    if (addSwitch === true) {
+        document.getElementById("dateöh").value = today;
+        document.getElementById("addEventRubbe").textContent = "Event " + today;
+    }
 })
 
 const pilBak = document.getElementById("pilBak");
 pilBak.addEventListener("click", () => {
     setCalendarDatesBak();
+    getTheEvents();
+    setDayHeight();
+    if (addSwitch === true) {
+        document.getElementById("dateöh").value = today;
+        document.getElementById("addEventRubbe").textContent = "Event " + today;
+    }
+});
+
+
+
+
+
+const addButton = document.getElementById("addButton");
+
+addButton.addEventListener("submit", () => {
+    fetch(url).then((response) => response.json()).then((events) => {
+        console.log(events);
+    })
 })
 
 
@@ -259,16 +388,16 @@ kategoriSec.addEventListener("click", (e) => {
             eventsSorted = events.filter(event => event.asviktigt).sort((a, b) => a.starttid.replace(":", "") - b.starttid.replace(":", "")).sort((a, b) => a.date.replace(/-/g, '') - b.date.replace(/-/g, ''));
         }
 
-        
+
         let eventSortedPerDay = [];
         let excluded = [];
         eventsSorted.forEach(event => {
-            if(!excluded.includes(event.date)) {
+            if (!excluded.includes(event.date)) {
                 eventSortedPerDay.push(eventsSorted.filter(ex => ex.date === event.date))
                 excluded.push(event.date);
             }
         })
-        
+
         console.log(eventSortedPerDay);
 
 
@@ -289,7 +418,7 @@ kategoriSec.addEventListener("click", (e) => {
                 if (event.merInfo === undefined) {
                     event.merInfo = "Ingen kommentar";
                 }
-    
+
                 let appendEvent = document.createElement("section");
                 // appendEvent.id = "valdKategoriEventsSec";
                 appendEvent.innerHTML = `
@@ -314,7 +443,7 @@ kategoriSec.addEventListener("click", (e) => {
                 </section>
             </section>
                 `;
-    
+
                 appendDay.appendChild(appendEvent);
             })
         })

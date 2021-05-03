@@ -36,30 +36,3 @@ $asviktigtColor: rgb(194, 95, 95);
 }
 
 
-#linearwrap {
-    background: linear-gradient(to right, white, black, white);
-    padding-bottom: 1px;
-}
-
-#bajs {
-    background: white;
-    padding-bottom: 0.3rem;
-    width: 15rem;
-}
-
-#arrow {
-    transform: rotate(90deg);
-    width: fit-content;
-}
-
-#rubbeSec {
-    display: flex;
-    gap: 0.2rem;
-    margin: 0.09rem 0 0.2rem 0.3rem;
-}
-
-#rubbeBoll {
-    border-radius: 1rem;
-    width: 1.18rem;
-    height: 1.1rem;
-}
