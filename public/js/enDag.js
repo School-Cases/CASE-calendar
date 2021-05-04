@@ -4,6 +4,7 @@
 // const url = "../../data/events.json";
 const url = "../data/events.json";
 
+const theDay = document.querySelector(".theDay");
 
 const eventTemplate = document.getElementById("eventTemplate");
 
@@ -18,7 +19,22 @@ let dates = document.querySelectorAll(".dates");
 let EventsPerDay = document.querySelectorAll(".EventsPerDay");
 const todaysDate = document.getElementById("todaysDate");
 
+const editHover = () => {
+    for (let i = 0; i < theDay.querySelector(".EventsPerDay").children.length; i++) {
+        theDay.querySelector(".EventsPerDay").children[i].addEventListener("mouseover", (e) => {
+            theDay.querySelector(".EventsPerDay").children[i].children[0].children[1].classList.remove("hidden")
+            editHoverSwitch = true;
+        })
+        theDay.querySelector(".EventsPerDay").children[i].addEventListener("mouseout", (e) => {
+            theDay.querySelector(".EventsPerDay").children[i].children[0].children[1].classList.add("hidden")
+        })
+    }
+}
+
+let editSwitch = false;
+
 const getTheEvents = () => {
+
     fetch(url).then((response) => response.json()).then((events) => {
         EventsPerDay.forEach(day => {
             day.innerHTML = "";
@@ -63,30 +79,25 @@ const getTheEvents = () => {
                         InfoDiven.classList.add("hidden");
                         switchMerInfo = false;
                     }
-
-                        
-
                 })
 
-                clone.getElementById("edit").addEventListener("click", (e) => {
-                    console.log(clone);
-                    console.log(e.target.closest("#bajs"));
-                    e.target.closest("#bajs").remove();
 
-                    
-                    
+                clone.getElementById("edit").addEventListener("click", (e) => {
+                    if (editSwitch === false) {
+                        console.log('hej false');
+                        console.log(e.target.closest("#bajs"));
+                        e.target.closest("#bajs").remove();
+
                         console.log(dayEvent);
                         let formClone = addEventTemplate.content.cloneNode(true);
                         theDay.children[2].appendChild(formClone);
                         const closeButton = document.getElementById("closeButton");
-                        addSwitch = true;
+
                         addEventInput.style.padding = "0.3rem";
                         switchBlackWhite.style.backgroundColor = "rgb(48, 47, 47)";
                         switchBlackWhite.style.paddingBottom = "0";
                         enDagAddEventButton.style.visibility = "hidden";
 
-
-                        // document.getElementById("addEventRubbe").value = dayEvent.date;
                         document.getElementById("dateöh").value = dayEvent.date;
                         document.getElementById("inputRubbe").value = dayEvent.rubrik;
                         document.getElementById("starttid").value = dayEvent.starttid;
@@ -105,28 +116,27 @@ const getTheEvents = () => {
 
                         closeButton.remove();
 
+                        editSwitch = true;
+                    } else {
+                        console.log('hej true');
+                    }
+
+
+                    setDayHeight()
                 })
 
                 date.querySelector(".EventsPerDay").appendChild(clone);
-                
-                
 
-
-                
             })
             setDayHeight();
+
         })
+        editHover()
     });
+
 }
 
 getTheEvents()
-
-
-
-
-
-
-
 
 
 
@@ -282,27 +292,105 @@ const setCalendarDatesBak = () => {
     setCorrectDayString();
 };
 
+const setCalendarDatesBakX7 = () => {
+    todayDay = new Date(+new Date(yesterday) - 86400000 * 6).getDay();
+    today = new Date(+new Date(yesterday) - 86400000 * 6).toLocaleDateString();
+    yesterdayDay = new Date(+new Date(today) - 86400000).getDay();
+    yesterday = new Date(+new Date(today) - 86400000).toLocaleDateString();
+    yeYesterdayDay = new Date(+new Date(today) - 86400000 * 2).getDay();
+    yeYesterday = new Date(+new Date(today) - 86400000 * 2).toLocaleDateString();
+    tomorrowDay = new Date(+new Date(today) + 86400000).getDay();
+    tomorrow = new Date(+new Date(today) + 86400000).toLocaleDateString();
+    toTomorrowDay = new Date(+new Date(tomorrow) + 86400000).getDay();
+    toTomorrow = new Date(+new Date(tomorrow) + 86400000).toLocaleDateString();
+
+    setCorrectDateString();
+    setCorrectDayString();
+};
+
+const setCalendarDatesFramX7 = () => {
+    todayDay = new Date(+new Date(yesterday) + 86400000 * 8).getDay();
+    today = new Date(+new Date(yesterday) + 86400000 * 8).toLocaleDateString();
+    yesterdayDay = new Date(+new Date(today) - 86400000).getDay();
+    yesterday = new Date(+new Date(today) - 86400000).toLocaleDateString();
+    yeYesterdayDay = new Date(+new Date(today) - 86400000 * 2).getDay();
+    yeYesterday = new Date(+new Date(today) - 86400000 * 2).toLocaleDateString();
+    tomorrowDay = new Date(+new Date(today) + 86400000).getDay();
+    tomorrow = new Date(+new Date(today) + 86400000).toLocaleDateString();
+    toTomorrowDay = new Date(+new Date(tomorrow) + 86400000).getDay();
+    toTomorrow = new Date(+new Date(tomorrow) + 86400000).toLocaleDateString();
+
+    setCorrectDateString();
+    setCorrectDayString();
+};
+
+const setYear = () => {
+    let year = new Date(today).getFullYear();
+    document.getElementById("year").textContent = year;
+}
+setYear();
+
+// const setDayHeight = () => {
+//     for (let i = 0; i < allDayDivs.length; i++) {
+//         let childrenHeight = 0;
+//         // console.log(allDayDivs[i].children[1]);
+//         for (let i2 = 0; i2 < allDayDivs[i].children.length; i2++) {
+//             childrenHeight = childrenHeight + allDayDivs[i].children[i2].offsetHeight;
+//             // console.log(allDayDivs[i].children[i2]);
+//         }
+//         console.log(allDayDivs[i].offsetHeight ,childrenHeight);
+//         if (allDayDivs[i].offsetHeight < childrenHeight) {
+//             allDayDivs[i].style.height = `fit-content`;
+//         } else {
+//             allDayDivs[i].style.height = `70vh`;
+//         };
+//     }
+// };
+
+
 
 const setDayHeight = () => {
-    allDayDivs.forEach(div => {
-        // console.log(div);
-        let childrenHeight = 0;
-        for (let i = 0; i < div.children.length; i++) {
-            // console.log(div.offsetHeight, div.children[i].offsetHeight);
-            childrenHeight += div.children[i].offsetHeight;
-        }
-        // console.log(div.offsetHeight, childrenHeight);
-        if (454 < childrenHeight) {
-            div.style.height = `fit-content`;
-        } else {
-            div.style.height = `70vh`;
-        };
-    })
+    let div = allDayDivs[2];
+    // console.log(div.offsetHeight);
+    let childrenHeight = 0;
+    for (let i = 0; i < div.children.length; i++) {
+
+        // console.log(div.offsetHeight, div.children[i].offsetHeight);
+        childrenHeight = childrenHeight + div.children[i].offsetHeight;
+    }
+    // console.log(div.offsetHeight, div,  childrenHeight);
+    if (div.offsetHeight < childrenHeight) {
+        div.style.height = `fit-content`;
+        // console.log('hej');
+    } else {
+        div.style.height = `70vh`;
+    };
 };
 
 
 
-const theDay = document.querySelector(".theDay");
+// const setDayHeight = () => {
+//     allDayDivs.forEach(div => {
+//         // console.log(div.offsetHeight);
+//         let childrenHeight = 0;
+//         for (let i = 0; i < div.children.length; i++) {
+
+//             // console.log(div.offsetHeight, div.children[i].offsetHeight);
+//             childrenHeight = childrenHeight + div.children[i].offsetHeight;
+//         }
+//         console.log(div.offsetHeight, div,  childrenHeight);
+//         if (div.offsetHeight < childrenHeight) {
+//             div.style.height = `fit-content`;
+//             console.log('hej');
+//         } else {
+//             div.style.height = `70vh`;
+//         };
+//     })
+// };
+
+
+
+
 const enDagAddEventButton = theDay.children[3].children[0];
 const addEventInput = document.getElementById("addEventInput");
 const switchBlackWhite = document.querySelector("#switchBlackWhite");
@@ -321,7 +409,7 @@ enDagAddEventButton.addEventListener("click", (e) => {
         enDagAddEventButton.style.visibility = "hidden";
         document.getElementById("dateöh").value = today;
         document.getElementById("addEventRubbe").textContent = "Event " + today;
-        setDayHeight();
+        // setDayHeight();
         closeButton.addEventListener("click", () => {
             theDay.children[2].removeChild(document.getElementById("addEventInputSec"));
             enDagAddEventButton.textContent = "+";
@@ -330,15 +418,22 @@ enDagAddEventButton.addEventListener("click", (e) => {
             switchBlackWhite.style.backgroundColor = "rgb(48, 47, 47)";
             switchBlackWhite.style.paddingBottom = "3rem";
             enDagAddEventButton.style.visibility = "visible";
-            setDayHeight();
+            // setDayHeight();
         })
     } else {
         return;
     }
 });
 
+
+
+
+
+
+
 const pilFram = document.getElementById("pilFram");
 pilFram.addEventListener("click", () => {
+    // editHover()
     setCalendarDatesFram();
     getTheEvents();
     setDayHeight();
@@ -346,10 +441,11 @@ pilFram.addEventListener("click", () => {
         document.getElementById("dateöh").value = today;
         document.getElementById("addEventRubbe").textContent = "Event " + today;
     }
+    setYear();
 })
-
 const pilBak = document.getElementById("pilBak");
 pilBak.addEventListener("click", () => {
+    // editHover()
     setCalendarDatesBak();
     getTheEvents();
     setDayHeight();
@@ -357,8 +453,30 @@ pilBak.addEventListener("click", () => {
         document.getElementById("dateöh").value = today;
         document.getElementById("addEventRubbe").textContent = "Event " + today;
     }
+    setYear();
 });
-
+const pilBakX7 = document.getElementById("pilBakX7");
+pilBakX7.addEventListener("click", () => {
+    setCalendarDatesBakX7();
+    getTheEvents();
+    setDayHeight();
+    if (addSwitch === true) {
+        document.getElementById("dateöh").value = today;
+        document.getElementById("addEventRubbe").textContent = "Event " + today;
+    }
+    setYear();
+});
+const pilFramX7 = document.getElementById("pilFramX7");
+pilFramX7.addEventListener("click", () => {
+    setCalendarDatesFramX7();
+    getTheEvents();
+    // setDayHeight();
+    if (addSwitch === true) {
+        document.getElementById("dateöh").value = today;
+        document.getElementById("addEventRubbe").textContent = "Event " + today;
+    }
+    setYear();
+});
 
 
 
@@ -482,6 +600,8 @@ kategoriSec.addEventListener("click", (e) => {
         // })
     });
 });
+
+
 
 // om månad börjar med en nolla - ta bort nolla - forsättning på set calenderFunktionerna =
 

@@ -9,20 +9,19 @@ const deleteAllEvents = () => {
     fs.writeFileSync("./public/data/events.json", "[]");
 }
 
-const deleteEventById = (id) => {
-    let index = events.findIndex(e => e.id === id);
-    console.log(index);
-    events.splice(index, 1);
-    fs.writeFileSync('./public/data/events.json', JSON.stringify(events), 'utf-8');
-}
-
-
 const findAllEvents = () => {
     return events;
 }
 
 const findEventById = (id) => {
     return events.find(event => event.id === id);
+}
+
+const deleteEventById = (id) => {
+    let index = events.findIndex(e => e.id === id);
+    console.log(index);
+    events.splice(index, 1);
+    fs.writeFileSync('./public/data/events.json', JSON.stringify(events), 'utf-8');
 }
 
 const createEvent = (body) => {
