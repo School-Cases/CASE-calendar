@@ -1,12 +1,15 @@
 import fs from "fs";
 
-let events = JSON.parse(fs.readFileSync('./public/data/events.json', 'utf-8'));
+const eventsJson = './data/events.json';
+
+let events = JSON.parse(fs.readFileSync(eventsJson, 'utf-8'));
+
+const randStr = () => { const lettersAsString = `A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,0,1,2,3,4,5,6,7,8,9`; const letters = lettersAsString.split(','); let randStr = ''; for(let i = 0; i < 40; i++) { randStr += letters[Math.floor(Math.random() * letters.length)]; }; return randStr; };
 
 
 const deleteAllEvents = () => {
-    console.log("lyss");
-    fs.unlinkSync("./public/data/events.json");
-    fs.writeFileSync("./public/data/events.json", "[]");
+    fs.unlinkSync(eventsJson);
+    fs.writeFileSync(eventsJson, "[]");
 }
 
 const findAllEvents = () => {
@@ -18,19 +21,57 @@ const findEventById = (id) => {
 }
 
 const deleteEventById = (id) => {
-    let index = events.findIndex(e => e.id === id);
-    console.log(index);
+    let index = events.findIndex(e => e.id == id);
     events.splice(index, 1);
-    fs.writeFileSync('./public/data/events.json', JSON.stringify(events), 'utf-8');
+    fs.writeFileSync(eventsJson, JSON.stringify(events), 'utf-8');
 }
 
+const updateEventById = (id, body) => {
+    try {
+        console.log(id);
+        id = parseInt(id);
+        const eventToUpdate = findEventById(id);
+
+        if (!eventToUpdate) {
+            throw `No Event found with id: ${id}`;
+        }
+
+        const updatedEvent = {
+            id: eventToUpdate.id,
+            rubrik: body.rubrik || eventToUpdate.rubrik,
+            date: body.date || eventToUpdate.date,
+            jobb: body.jobb || eventToUpdate.jobb,
+            fritid: body.fritid || eventToUpdate.fritid,
+            asviktigt: body.asviktigt || eventToUpdate.asviktigt,
+            starttid: body.starttid || eventToUpdate.starttid,
+            sluttid: body.sluttid || eventToUpdate.sluttid,
+            merInfo: body.merInfo || eventToUpdate.merInfo
+        }
+
+        // Clean out the old Event
+        events = events.filter(event => event.id !== id);
+        
+        // Add new Event        
+        events.push(updatedEvent);
+
+        // Save
+        fs.writeFileSync(eventsJson, JSON.stringify(events), 'utf-8');
+        return true;
+    } catch(error) {
+        // console.log(error);
+        return false;
+    }
+
+}
+
+
+
 const createEvent = (body) => {
-    // return products.find(prod => prod.id === id);
-    console.log(body);
+
 
     try {
         const newEvent = {
-            id: events.length,
+            id: randStr(),
             date: body.date,
             rubrik: body.rubrik,
             jobb: body.jobb,
@@ -44,13 +85,13 @@ const createEvent = (body) => {
         events.push(newEvent);
 
 
-        fs.writeFileSync('./public/data/events.json', JSON.stringify(events), 'utf-8');
+        fs.writeFileSync(eventsJson, JSON.stringify(events), 'utf-8');
         return true;
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         return false;
     };
 
 }
 
-export default { findAllEvents, findEventById, createEvent, deleteAllEvents, deleteEventById };
+export default { findAllEvents, findEventById, createEvent, deleteAllEvents, deleteEventById, updateEventById };

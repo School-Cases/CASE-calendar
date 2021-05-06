@@ -2,7 +2,7 @@ console.log('hello there');
 
 import express from "express";
 import EventController from "./controllers/EventController.js";
-import bodyParser from "body-parser";
+// import bodyParser from "body-parser";
 import path from "path";
 // import { eventNames } from "cluster";
 
@@ -12,8 +12,8 @@ const PORT = 3002;
 
 
 
-app.use(bodyParser.urlencoded());
-app.use(bodyParser.json());
+app.use(express.urlencoded());
+app.use(express.json());
 app.use(express.static(path.resolve("./public")));
 
 // get all events
@@ -24,6 +24,12 @@ app.get('/events/:id', EventController.getEventById);
 app.post('/create', EventController.createEvent);
 
 app.get('/deleteAll', EventController.removeAllEvents);
+
+app.get('/delete/:id', EventController.removeEventById);
+
+app.post('/update/:id', EventController.updateEvent);
+
+
 
 // EventController.removeAllEvents();
 

@@ -1,7 +1,6 @@
 import EventModel from '../models/Events.js';
 
 const getAllEvents = (req, res) => {
-    console.log(req);
     const events = EventModel.findAllEvents();
     res.send({data: events});
 }
@@ -11,15 +10,34 @@ const removeAllEvents = () => {
     // res.send({data: events});
 }
 
-const removeEventById = (id) => {
+const updateEvent = (req, res) => {
+    const { id } = req.params;
+    const { body } = req;
+
+    const success = EventModel.updateEventById(id, body);
+
+    if (success) {
+        // res.status(201).json({message: "Event update!"})
+        res.redirect('/html/enDag.html');
+    } else {
+        res.status(400).json({message: "Event update failed!"});
+    }
+}
+
+const removeEventById = (req, res) => {
+    console.log(req.params);
+    const id = req.params.id;
+    
     EventModel.deleteEventById(id);
+    console.log(id, "ehheheheheheheakkngsdaojgnsdopgnish");
+    res.redirect('/html/enDag.html');
 }
 
 const getEventById = (req, res) => {
     
     const id = req.params.id;
     const event = EventModel.findEventById(id);
-    // const event = events.filter(e => e.id === req.params.id);
+
     if (!event) {
         res.status(404).send({message: "event not found"});
     } else {
@@ -27,9 +45,8 @@ const getEventById = (req, res) => {
     }
 };
 
-const createEvent = (req, res) => {
-    console.log('create');
 
+const createEvent = (req, res) => {
     const body = req.body;
 
     const success = EventModel.createEvent(body);
@@ -39,11 +56,6 @@ const createEvent = (req, res) => {
     } else {
         res.status(400).json({message: "event failed create"})
     };
-
-
-
-    console.log(body);
-
 }
 
-export default { getAllEvents, getEventById, createEvent, removeAllEvents, removeEventById };
+export default { getAllEvents, getEventById, createEvent, removeAllEvents, removeEventById, updateEvent };

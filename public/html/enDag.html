@@ -195,6 +195,61 @@
         </section>
     </template>
 
+
+    <template id="updateEventTemplate">
+        <section class="" id="addEventInputSec">
+            <!-- <div id="closeButton">x</div> -->
+            <div id="addEventRubbe">Event måndag 14/5</div>
+            <a id="delete" href="">delete</a>
+            
+
+            <form id="updateForm" method="post">
+                <input type="text" name="date" class="hidden" id="dateöh">
+
+                <div id="inputRubbeDiv">
+                    <input type="text" name="rubrik" id="inputRubbe" placeholder="Rubrik">
+                </div>
+
+                <div class="flex" id="tidSec">
+                    <div id="tid">Tid:</div>
+                    <input type="time" name="starttid" id="starttid">
+                    <div id="öh">-</div><input type="time" name="sluttid" id="sluttid">
+                </div>
+                <div id="kategoriRubbe">
+                    Kategori:
+                </div>
+                <div id="inputKategoriDiv">
+                    <div class="flex">
+                        <input type="checkbox" name="jobb" id="jobb">
+                        <div class="dot" id="jobbDot"></div>
+                        <label id="jobbLabel" for="jobb">JOBB</label>
+                        <br>
+                    </div>
+                    <div class="flex">
+                        <input type="checkbox" name="fritid" id="fritid">
+                        <div class="dot" id="fritidDot"></div>
+                        <label id="fritidLabel" for="fritid">FRITID</label>
+                        <br>
+                    </div>
+                    <div class="flex">
+                        <input type="checkbox" name="asviktigt" id="asviktigt">
+                        <div class="dot" id="asviktigtDot"></div>
+                        <label id="asviktigtLabel" for="asviktigt">ASVIKTIGT</label>
+                    </div>
+                </div>
+
+                <textarea name="merInfo" id="merInfoText" cols="28" rows="5" placeholder="Mer info"></textarea><br>
+
+                <div id="submitDiv"><input type="submit" value="ADD EVENT" id="submitButton"></div>
+
+
+
+            </form>
+
+        </section>
+    </template>
+
+
     <template id="eventTemplate">
         <section id="linearwrap">
             <div id="bajs">
@@ -322,6 +377,8 @@
 
 
     <script src="../js/enDag.js"></script>
+
+
 
 
 </body>
