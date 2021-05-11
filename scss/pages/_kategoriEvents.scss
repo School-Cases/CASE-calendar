@@ -14,25 +14,65 @@ $asviktigtColor: rgb(194, 95, 95);
 //     border: 1px solid black;
 // }
 
+#kategoriSecRubbe1 {
+    font-family: $lato;
+    align-items: center;
+    justify-content: center;
+    height: 3.5rem;
+    width: 8.5rem;
 
-#valdKategoriEventsSec {
-
-    #kategori {
-
+    #kategoriSecRubbe {
+        width: fit-content;
+        color: white;
+        font-size: 1.4rem;
+        font-weight: 900;
+        margin: auto;
     }
-    #valdKategoriEvents {
+}
 
-        section {
+#removehehe {
+    font-family: $lato;
 
-            #bajs {
-                width: fit-content;
+    .valdKategoriEventsSec {
+        background-color: $mainColor;
+        padding: 0.5rem 0.5rem 0.8rem 0.5rem;
+
+        .rubrikDate {
+            color: white;
+            font-size: 130%;
+            font-weight: 700;
+        }
+
+
+        .dayEvents {
+            gap: 1rem;
+            margin: 0 1rem;
+
+            #linearwrap {
+                width: 10%;
+
+                #bajs {
+
+                    #eventTime {}
+
+                    #edit {
+                        transform: scale(0.7);
+                    }
+
+                    #rubbeSec {
+
+                        #eventRubrik {}
+
+                        #arrow {}
+                    }
+                }
             }
         }
+
+
     }
 }
 
 .flex {
     display: flex;
 }
-
-

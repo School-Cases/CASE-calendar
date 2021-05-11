@@ -31,6 +31,7 @@
     </header>
 
     <section id="enDagHelaSkiten">
+        <!-- <a href="http://localhost:3002/deleteAll"><div>deleteall</div></a> -->
 
         <div id="year">hehehehe</div>
 
@@ -74,8 +75,9 @@
                 <div id="todaysDate" class="dates">14/4</div>
                 <div class="veckodag todayDay">MÅNDAG</div>
                 <div id="addEventInput"></div>
+                <div id="addButton" class="enDagAddEventButton">+</div>
                 <div id="switchBlackWhite" class="enDagDagSecEventDiv">
-                    <div id="addButton" class="enDagAddEventButton">+</div>
+                    <!-- <div id="addButton" class="enDagAddEventButton">+</div> -->
                     <div class="EventsPerDay"></div>
 
                     <!-- <section id="linearwrap">
@@ -100,7 +102,7 @@
                             </div>
                         </div>
                     </section> -->
-
+                    <div id="space"></div>
                 </div>
                 <!-- <div id="showMore">MER</div> -->
             </div>
@@ -200,8 +202,8 @@
         <section class="" id="addEventInputSec">
             <!-- <div id="closeButton">x</div> -->
             <div id="addEventRubbe">Event måndag 14/5</div>
-            <a id="delete" href="">delete</a>
-            
+            <div id="deleteDiv"><a id="delete" href="">Ta bort event</a></div>
+
 
             <form id="updateForm" method="post">
                 <input type="text" name="date" class="hidden" id="dateöh">
@@ -259,10 +261,17 @@
                 <div class="hidden" id="edit">
                     <i class="fas fa-pencil-alt"></i>
                 </div>
+                <section id="bollar" class="flex">
+                    <div id="rubbeBoll1" class=""></div>
+                    <div id="rubbeBoll2" class=""></div>
+                    <div id="rubbeBoll3" class=""></div>
+                </section>
                 <div id="rubbeSec">
-                    <div id="rubbeBoll" class="">
-
-                    </div>
+                    <!-- <section id="bollar" class="flex">
+                        <div id="rubbeBoll1" class=""></div>
+                        <div id="rubbeBoll2" class=""></div>
+                        <div id="rubbeBoll3" class=""></div>
+                    </section> -->
                     <div id="eventRubrik">
                         Bajsa
                     </div>
@@ -311,7 +320,8 @@
 
 
 
-    <div id="kategoriSecRubbe"></div>
+    <div class="flex" id="kategoriSecRubbe1"><div id="kategoriSecRubbe"></div></div>
+    
 
     <section id="removehehe"></section>
 

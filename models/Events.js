@@ -29,7 +29,7 @@ const deleteEventById = (id) => {
 const updateEventById = (id, body) => {
     try {
         console.log(id);
-        id = parseInt(id);
+        // id = parseInt(id);
         const eventToUpdate = findEventById(id);
 
         if (!eventToUpdate) {

@@ -1,19 +1,27 @@
 
+
+// fixa: deleteAll button. exempelgenerator (skapar massa events på dagrna som syns). fixa kategorivisning. fixa deletebutton.
+
+
+// variables
+
 const theDay = document.querySelector(".theDay");
-
 const eventTemplate = document.getElementById("eventTemplate");
-
-// const EventsPerDay = document.getElementById("EventsPerDay");
-
 const addEventTemplate = document.getElementById("addEventTemplate");
 const updateEventTemplate = document.getElementById("updateEventTemplate");
-
-
 const allDayDivs = document.querySelectorAll(".enDagDagSec");
-
 let dates = document.querySelectorAll(".dates");
 let EventsPerDay = document.querySelectorAll(".EventsPerDay");
 const todaysDate = document.getElementById("todaysDate");
+
+// const enDagAddEventButton = theDay.children[3].children[0];
+const enDagAddEventButton = document.getElementById("addButton");
+
+const addEventInput = document.getElementById("addEventInput");
+const switchBlackWhite = document.querySelector("#switchBlackWhite");
+
+
+// functions
 
 const editHover = () => {
     for (let i = 0; i < theDay.querySelector(".EventsPerDay").children.length; i++) {
@@ -28,12 +36,10 @@ const editHover = () => {
 }
 
 let editSwitch = false;
-
 const getTheEvents = () => {
-
     fetch('http://localhost:3002/events').then((response) => response.json()).then((eventsS) => {
         let events = eventsS.data;
-        events = events.sort((a, b) => a.starttid.replace(":", "") - b.starttid.replace(":", "")).sort((a, b) => a.date.replace(/-/g, '') - b.date.replace(/-/g, ''));
+        events = events.sort((a, b) => a.starttid.replace(":", "") - b.starttid.replace(":", ""));
         EventsPerDay.forEach(day => {
             day.innerHTML = "";
         })
@@ -41,25 +47,24 @@ const getTheEvents = () => {
             let thisDaysEvents = events.filter((event) => {
                 return event.date === date.getAttribute('data-date');
             })
-
             thisDaysEvents.forEach(dayEvent => {
-
                 let clone = eventTemplate.content.cloneNode(true);
                 clone.getElementById("eventTime").textContent = `${dayEvent.starttid} - ${dayEvent.sluttid}`;
                 if (dayEvent.jobb) {
-                    clone.getElementById("rubbeBoll").style.backgroundColor = "rgb(211, 191, 79)";
-                } else if (dayEvent.fritid) {
-                    clone.getElementById("rubbeBoll").style.backgroundColor = "rgb(88, 173, 77)";
-                } else if (dayEvent.asviktigt) {
-                    clone.getElementById("rubbeBoll").style.backgroundColor = "rgb(194, 95, 95)";
-                } else {
-                    clone.getElementById("rubbeBoll").style.display = "none";
-                }
+                    clone.getElementById("rubbeBoll1").style.backgroundColor = "rgb(211, 191, 79)";
+                    clone.getElementById("rubbeBoll1").classList.add("rubbeBoll");
+                } if (dayEvent.fritid) {
+                    clone.getElementById("rubbeBoll2").style.backgroundColor = "rgb(88, 173, 77)";
+                    clone.getElementById("rubbeBoll2").classList.add("rubbeBoll");
+                } if (dayEvent.asviktigt) {
+                    clone.getElementById("rubbeBoll3").style.backgroundColor = "rgb(194, 95, 95)";
+                    clone.getElementById("rubbeBoll3").classList.add("rubbeBoll");
+                } 
+                // else {
+                //     clone.getElementById("rubbeBoll").style.display = "none";
+                // }
                 clone.getElementById("eventRubrik").textContent = `${dayEvent.rubrik}`;
-
-
                 clone.getElementById("merInfoDiv").textContent = ``;
-
 
                 let switchMerInfo = false;
                 clone.getElementById("arrow").addEventListener("click", (e) => {
@@ -70,7 +75,6 @@ const getTheEvents = () => {
                         InfoDiven.classList.remove("hidden");
                         switchMerInfo = true;
                     } else {
-                        console.log('hej');
                         e.target.style.transform = "rotate(0deg)";
                         let InfoDiven = e.target.parentNode.nextSibling.nextSibling;
                         InfoDiven.innerHTML = ``;
@@ -79,21 +83,17 @@ const getTheEvents = () => {
                     }
                 })
 
-
                 clone.getElementById("edit").addEventListener("click", (e) => {
                     if (editSwitch === false) {
-                        console.log('hej false');
-                        console.log(e.target.closest("#bajs"));
+
+                        allDayDivs[2].style.height = "fit-content";
+
                         e.target.closest("#bajs").remove();
-                        
-                        console.log(dayEvent);
+
                         let formClone = updateEventTemplate.content.cloneNode(true);
                         theDay.children[2].appendChild(formClone);
                         // const closeButton = document.getElementById("closeButton");
                         document.getElementById("delete").setAttribute("href", `http://localhost:3002/delete/${dayEvent.id}`)
-
-
-                        
 
 
                         addEventInput.style.padding = "0.3rem";
@@ -114,32 +114,21 @@ const getTheEvents = () => {
                         }
                         document.getElementById("merInfoText").value = dayEvent.merInfo;
                         document.getElementById("submitButton").value = "UPPDATERA";
-
-                        document.getElementById("addEventRubbe").textContent = "Uppdatera event " + dayEvent.date;
-                                    editSwitch = true;
+                        document.getElementById("addEventRubbe").innerHTML = "Uppdatera event <br><center>" + dayEvent.date + "</center>";
+                        editSwitch = true;
                     } else {
                         return;
                     }
-
-
-                    setDayHeight()
+                    // setDayHeight()
                 })
-
                 date.querySelector(".EventsPerDay").appendChild(clone);
-
             })
             setDayHeight();
-
         })
         editHover()
     });
-
 }
-
 getTheEvents()
-
-
-
 
 let todayDay;
 let yesterdayDay;
@@ -153,85 +142,40 @@ let today;
 let tomorrow;
 let toTomorrow;
 
-
-
-// const setCorrectDateString = () => {
-//     allDayDivs[0].dataset.date = yeYesterday;
-//     allDayDivs[1].dataset.date = yesterday;
-//     allDayDivs[2].dataset.date = today;
-//     allDayDivs[3].dataset.date = tomorrow;
-//     allDayDivs[4].dataset.date = toTomorrow;
-//     let yeYesterdaySplitted = yeYesterday.split("-");
-//     dates[0].textContent = yeYesterdaySplitted[2] + "/" + yeYesterdaySplitted[1];
-
-//     let yesterdaySplitted = yesterday.split("-");
-//     dates[1].textContent = yesterdaySplitted[2] + "/" + yesterdaySplitted[1];
-
-//     let todaySplitted = today.split("-");
-//     dates[2].textContent = todaySplitted[2] + "/" + todaySplitted[1];
-
-//     let tomorrowSplitted = tomorrow.split("-");
-//     dates[3].textContent = tomorrowSplitted[2] + "/" + tomorrowSplitted[1];
-
-//     let toTomorrowSplitted = toTomorrow.split("-");
-//     dates[4].textContent = toTomorrowSplitted[2] + "/" + toTomorrowSplitted[1];
-// }
-
 const setCorrectDateString = () => {
     allDayDivs[0].dataset.date = yeYesterday;
     allDayDivs[1].dataset.date = yesterday;
     allDayDivs[2].dataset.date = today;
     allDayDivs[3].dataset.date = tomorrow;
     allDayDivs[4].dataset.date = toTomorrow;
+
     let yeYesterdaySplitted = yeYesterday.split("-");
-    dates[0].textContent = yeYesterdaySplitted[2] + "/" + yeYesterdaySplitted[1];
-
     let yesterdaySplitted = yesterday.split("-");
-    dates[1].textContent = yesterdaySplitted[2] + "/" + yesterdaySplitted[1];
-
     let todaySplitted = today.split("-");
-    dates[2].textContent = todaySplitted[2] + "/" + todaySplitted[1];
-
     let tomorrowSplitted = tomorrow.split("-");
-    dates[3].textContent = tomorrowSplitted[2] + "/" + tomorrowSplitted[1];
-
     let toTomorrowSplitted = toTomorrow.split("-");
-    dates[4].textContent = toTomorrowSplitted[2] + "/" + toTomorrowSplitted[1];
+
+    splittedArray = [yeYesterdaySplitted, yesterdaySplitted, todaySplitted, tomorrowSplitted, toTomorrowSplitted];
+
+    let counter = 0;
+    splittedArray.forEach(date => {
+        if (date[1].indexOf(0) === 0 && date[2].indexOf(0) === 0) {
+            let dag = date[2];
+            let månad = date[1];
+            date = `${dag[1]}/${månad[1]}`;
+        } else if (date[1].indexOf(0) === 0) {
+            let månad = date[1];
+            date = `${date[2]}/${månad[1]}`;
+        } else if (date[2].indexOf(0) === 0) {
+            let dag = date[2];
+            date = `${dag[1]}/${date[1]}`;
+        } else {
+            date = `${date[2]}/${date[1]}`;
+        }
+        dates[counter].textContent = date;
+        counter++;
+    })
 }
-
-// om månad börjar med en nolla - ta bort nolla - forsättning på set calenderFunktionerna =
-
-// let yesterdaySplitted = yesterday.split("-");
-//     if (yesterdaySplitted[1].indexOf(0) === 0) {
-//         let str = yesterdaySplitted[1];
-//         for (let i = 0; i < str.length; i++) {
-//             dates[0].textContent = yesterdaySplitted[2] + "/" + str[1];
-//         }
-//     } else {
-//         dates[0].textContent = yesterdaySplitted[2] + "/" + yesterdaySplitted[1];
-//     }
-
-//     let todaySplitted = today.split("-");
-//     if (todaySplitted[1].indexOf(0) === 0) {
-//         let str = todaySplitted[1];
-//         for (let i = 0; i < str.length; i++) {
-//             dates[1].textContent = todaySplitted[2] + "/" + str[1];
-//         }
-//     } else {
-//         dates[1].textContent = todaySplitted[2] + "/" + todaySplitted[1];
-//     }
-
-//     let tomorrowSplitted = tomorrow.split("-");
-//     if (tomorrowSplitted[1].indexOf(0) === 0) {
-//         let str = tomorrowSplitted[1];
-//         for (let i = 0; i < str.length; i++) {
-//             dates[2].textContent = tomorrowSplitted[2] + "/" + str[1];
-//         }
-//     } else {
-//         dates[2].textContent = tomorrowSplitted[2] + "/" + tomorrowSplitted[1];
-//     }
-
-
 
 const setCorrectDayString = () => {
     let söndag = {
@@ -284,10 +228,8 @@ const setCorrectDayString = () => {
         string: "toTomorrowDay"
     };
 
-    let dagar = [söndag, måndag, tisdag, onsdag, torsdag, fredag, lördag, söndag];
-
+    let dagar = [söndag, måndag, tisdag, onsdag, torsdag, fredag, lördag];
     let dagDivar = [yeYesterdayDayObj, yesterdayDayObj, todayDayObj, tomorrowDayObj, toTomorrowDayObj];
-
 
     dagar.forEach(dag => {
         dagDivar.forEach(dagDiv => {
@@ -296,11 +238,22 @@ const setCorrectDayString = () => {
             }
         })
     })
+    allDayDivs.forEach(day => {
+        let datum = day.querySelector(".dates");
+        let veckodag = day.querySelector(".veckodag");
+        if (veckodag.textContent === "LÖRDAG" || veckodag.textContent === "SÖNDAG") {
+            // day.style.border ="0.35rem solid rgb(255, 80, 80)";
+            // veckodag.style.color = "rgb(255, 160, 160)";
+            datum.style.color = "rgb(255, 80, 80)";
+        } else {
+            // day.style.border ="none";
+            // veckodag.style.color = "white";
+            datum.style.color = "white";
+        }
+    })
 }
 
-
 const setCalendarDates = () => {
-
     yeYesterdayDay = new Date(+new Date() - 86400000 * 2).getDay();
     yeYesterday = new Date(+new Date() - 86400000 * 2).toLocaleDateString();
     yesterdayDay = new Date(+new Date() - 86400000).getDay();
@@ -311,7 +264,6 @@ const setCalendarDates = () => {
     tomorrow = new Date(+new Date() + 86400000).toLocaleDateString();
     toTomorrowDay = new Date(+new Date() + 86400000 * 2).getDay();
     toTomorrow = new Date(+new Date() + 86400000 * 2).toLocaleDateString();
-
     setCorrectDateString();
     setCorrectDayString();
 };
@@ -328,12 +280,9 @@ const setCalendarDatesFram = () => {
     tomorrow = new Date(+new Date(tomorrow) + 86400000).toLocaleDateString();
     toTomorrowDay = new Date(+new Date(tomorrow) + 86400000).getDay();
     toTomorrow = new Date(+new Date(tomorrow) + 86400000).toLocaleDateString();
-
     setCorrectDateString();
     setCorrectDayString();
 };
-
-
 
 const setCalendarDatesBak = () => {
     todayDay = new Date(+new Date(yesterday)).getDay();
@@ -346,7 +295,6 @@ const setCalendarDatesBak = () => {
     tomorrow = new Date(+new Date(today) + 86400000).toLocaleDateString();
     toTomorrowDay = new Date(+new Date(tomorrow) + 86400000).getDay();
     toTomorrow = new Date(+new Date(tomorrow) + 86400000).toLocaleDateString();
-
     setCorrectDateString();
     setCorrectDayString();
 };
@@ -362,7 +310,6 @@ const setCalendarDatesBakX7 = () => {
     tomorrow = new Date(+new Date(today) + 86400000).toLocaleDateString();
     toTomorrowDay = new Date(+new Date(tomorrow) + 86400000).getDay();
     toTomorrow = new Date(+new Date(tomorrow) + 86400000).toLocaleDateString();
-
     setCorrectDateString();
     setCorrectDayString();
 };
@@ -378,7 +325,6 @@ const setCalendarDatesFramX7 = () => {
     tomorrow = new Date(+new Date(today) + 86400000).toLocaleDateString();
     toTomorrowDay = new Date(+new Date(tomorrow) + 86400000).getDay();
     toTomorrow = new Date(+new Date(tomorrow) + 86400000).toLocaleDateString();
-
     setCorrectDateString();
     setCorrectDayString();
 };
@@ -388,6 +334,21 @@ const setYear = () => {
     document.getElementById("year").textContent = year;
 }
 setYear();
+
+// const setWeek = () => {
+//     const todayWeek = new Date(today);
+//     const firstDayOfYear = new Date(todayWeek.getFullYear(), 0, 1);
+//     const pastDaysOfYear = (todayWeek - firstDayOfYear) / 86400000;
+
+//     let theWeek = Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
+//     if (theWeek === 0) {
+//         theWeek = 52;
+//     } else if (theWeek === 53) {
+//         theWeek = 1;
+//     }
+//     console.log(theWeek);
+// }
+// setWeek();
 
 // const setDayHeight = () => {
 //     for (let i = 0; i < allDayDivs.length; i++) {
@@ -406,27 +367,31 @@ setYear();
 //     }
 // };
 
-
-
 const setDayHeight = () => {
+    
+    
     let div = allDayDivs[2];
+    console.log(div.style.height);
+    // let bajsbajs = div.style.height/0.6;
     // console.log(div.offsetHeight);
-    let childrenHeight = 0;
-    for (let i = 0; i < div.children.length; i++) {
+    // console.log(document.getElementById("switchBlackWhite").offsetHeight);
+    // document.getElementById("switchBlackWhite").style.height = `${bajsbajs}`;
+    // // console.log(div.offsetHeight);
+    // let childrenHeight = 0;
+    // for (let i = 0; i < div.children.length; i++) {
 
-        // console.log(div.offsetHeight, div.children[i].offsetHeight);
-        childrenHeight = childrenHeight + div.children[i].offsetHeight;
-    }
-    // console.log(div.offsetHeight, div,  childrenHeight);
-    if (div.offsetHeight < childrenHeight) {
-        div.style.height = `fit-content`;
-        // console.log('hej');
-    } else {
-        div.style.height = `70vh`;
-    };
+    //     // console.log(div.offsetHeight, div.children[i].offsetHeight);
+    //     childrenHeight = childrenHeight + div.children[i].offsetHeight;
+    // }
+    // // console.log(div.offsetHeight, div,  childrenHeight);
+    // if (div.offsetHeight < childrenHeight) {
+    //     div.style.height = `fit-content`;
+    //     // console.log('hej');
+    // } else {
+    //     div.style.height = `fit-content`;
+    // };
+    console.log('bajs');
 };
-
-
 
 // const setDayHeight = () => {
 //     allDayDivs.forEach(div => {
@@ -449,33 +414,36 @@ const setDayHeight = () => {
 
 
 
-
-const enDagAddEventButton = theDay.children[3].children[0];
-const addEventInput = document.getElementById("addEventInput");
-const switchBlackWhite = document.querySelector("#switchBlackWhite");
+// eventlisteners
 
 let addSwitch = false;
 enDagAddEventButton.addEventListener("click", (e) => {
     if (addSwitch === false) {
+        addSwitch = true;
+
+        allDayDivs[2].style.height = "fit-content";
+
         enDagAddEventButton.textContent = "";
         let clone = addEventTemplate.content.cloneNode(true);
         theDay.children[2].appendChild(clone);
         const closeButton = document.getElementById("closeButton");
-        addSwitch = true;
         addEventInput.style.padding = "0.3rem";
         switchBlackWhite.style.backgroundColor = "rgb(48, 47, 47)";
-        switchBlackWhite.style.paddingBottom = "0";
+        switchBlackWhite.style.height = "fit-content";
         enDagAddEventButton.style.visibility = "hidden";
         document.getElementById("dateöh").value = today;
         document.getElementById("addEventRubbe").textContent = "Event " + today;
         // setDayHeight();
         closeButton.addEventListener("click", () => {
+            addSwitch = false;
+
+            allDayDivs[2].style.height = "fit-content";
+
             theDay.children[2].removeChild(document.getElementById("addEventInputSec"));
             enDagAddEventButton.textContent = "+";
-            addSwitch = false;
             addEventInput.style.padding = "0";
             switchBlackWhite.style.backgroundColor = "rgb(48, 47, 47)";
-            switchBlackWhite.style.paddingBottom = "3rem";
+            switchBlackWhite.style.height = "51.2vh";
             enDagAddEventButton.style.visibility = "visible";
             // setDayHeight();
         })
@@ -484,45 +452,8 @@ enDagAddEventButton.addEventListener("click", (e) => {
     }
 });
 
-// let addSwitch = false;
-// enDagAddEventButton.addEventListener("click", (e) => {
-//     if (addSwitch === false) {
-//         enDagAddEventButton.textContent = "";
-//         let clone = addEventTemplate.content.cloneNode(true);
-//         theDay.children[2].appendChild(clone);
-//         const closeButton = document.getElementById("closeButton");
-//         addSwitch = true;
-//         addEventInput.style.padding = "0.3rem";
-//         switchBlackWhite.style.backgroundColor = "rgb(48, 47, 47)";
-//         switchBlackWhite.style.paddingBottom = "0";
-//         enDagAddEventButton.style.visibility = "hidden";
-//         document.getElementById("dateöh").value = today;
-//         document.getElementById("addEventRubbe").textContent = "Event " + today;
-//         // setDayHeight();
-//         closeButton.addEventListener("click", () => {
-//             theDay.children[2].removeChild(document.getElementById("addEventInputSec"));
-//             enDagAddEventButton.textContent = "+";
-//             addSwitch = false;
-//             addEventInput.style.padding = "0";
-//             switchBlackWhite.style.backgroundColor = "rgb(48, 47, 47)";
-//             switchBlackWhite.style.paddingBottom = "3rem";
-//             enDagAddEventButton.style.visibility = "visible";
-//             // setDayHeight();
-//         })
-//     } else {
-//         return;
-//     }
-// });
-
-
-
-
-
-
-
 const pilFram = document.getElementById("pilFram");
 pilFram.addEventListener("click", () => {
-    // editHover()
     setCalendarDatesFram();
     getTheEvents();
     setDayHeight();
@@ -534,7 +465,6 @@ pilFram.addEventListener("click", () => {
 })
 const pilBak = document.getElementById("pilBak");
 pilBak.addEventListener("click", () => {
-    // editHover()
     setCalendarDatesBak();
     getTheEvents();
     setDayHeight();
@@ -559,7 +489,7 @@ const pilFramX7 = document.getElementById("pilFramX7");
 pilFramX7.addEventListener("click", () => {
     setCalendarDatesFramX7();
     getTheEvents();
-    // setDayHeight();
+    setDayHeight();
     if (addSwitch === true) {
         document.getElementById("dateöh").value = today;
         document.getElementById("addEventRubbe").textContent = "Event " + today;
@@ -567,17 +497,12 @@ pilFramX7.addEventListener("click", () => {
     setYear();
 });
 
-
-
-
-const addButton = document.getElementById("addButton");
-
-addButton.addEventListener("submit", () => {
-    fetch(url).then((response) => response.json()).then((events) => {
-        console.log(events);
-    })
-})
-
+// const addButton = document.getElementById("addButton");
+// addButton.addEventListener("submit", () => {
+//     fetch(url).then((response) => response.json()).then((events) => {
+//         console.log(events);
+//     })
+// })
 
 const kategoriSec = document.getElementById("kategoriSec");
 kategoriSec.addEventListener("click", (e) => {
@@ -586,15 +511,18 @@ kategoriSec.addEventListener("click", (e) => {
     fetch('http://localhost:3002/events').then((response) => response.json()).then((events) => {
         events = events.data;
 
+        const kategoriSecRubbe1 = document.getElementById("kategoriSecRubbe1");
         let eventsSorted;
         if (chosenKat === "JOBB") {
             eventsSorted = events.filter(event => event.jobb).sort((a, b) => a.starttid.replace(":", "") - b.starttid.replace(":", "")).sort((a, b) => a.date.replace(/-/g, '') - b.date.replace(/-/g, ''));
+            kategoriSecRubbe1.style.backgroundColor = "rgb(211, 191, 79)";
         } else if (chosenKat === "FRITID") {
             eventsSorted = events.filter(event => event.fritid).sort((a, b) => a.starttid.replace(":", "") - b.starttid.replace(":", "")).sort((a, b) => a.date.replace(/-/g, '') - b.date.replace(/-/g, ''));
+            kategoriSecRubbe1.style.backgroundColor = "rgb(88, 173, 77)";
         } else if (chosenKat === "ASVIKTIGT") {
             eventsSorted = events.filter(event => event.asviktigt).sort((a, b) => a.starttid.replace(":", "") - b.starttid.replace(":", "")).sort((a, b) => a.date.replace(/-/g, '') - b.date.replace(/-/g, ''));
+            kategoriSecRubbe1.style.backgroundColor = "rgb(194, 95, 95)";
         }
-
 
         let eventSortedPerDay = [];
         let excluded = [];
@@ -605,138 +533,96 @@ kategoriSec.addEventListener("click", (e) => {
             }
         })
 
-        console.log(eventSortedPerDay);
-
-
-
-        const kategoriSecRubbe = document.getElementById("kategoriSecRubbe");
-        kategoriSecRubbe.textContent = chosenKat;
+        if (eventSortedPerDay.length === 0) {
+            kategoriSecRubbe1.classList.add("hidden");
+        } else {
+            kategoriSecRubbe1.classList.remove("hidden");
+            kategoriSecRubbe.textContent = chosenKat;
+        }
 
         document.getElementById("removehehe").innerHTML = "";
 
         eventSortedPerDay.forEach(day => {
-            console.log(day);
-
+            console.log(day[0].date);
             let appendDay = document.createElement("section");
             appendDay.classList.add("valdKategoriEventsSec");
+            // appendDay.classList.add("flex");
             document.getElementById("removehehe").appendChild(appendDay);
+            let dayEvents = document.createElement("section");
+            dayEvents.classList.add("flex");
+            dayEvents.classList.add("dayEvents");
+            appendDay.appendChild(dayEvents);
+            let rubrikDate = document.createElement("div");
+            rubrikDate.classList.add("rubrikDate");
+            rubrikDate.innerHTML = `${day[0].date}<br>`;
+            appendDay.prepend(rubrikDate);
 
             day.forEach(event => {
-                if (event.merInfo === undefined) {
-                    event.merInfo = "Ingen kommentar";
-                }
 
-                let appendEvent = document.createElement("section");
-                // appendEvent.id = "valdKategoriEventsSec";
-                appendEvent.innerHTML = `
-                <section class="flex" id="valdKategoriEvents">
-                <section id="linearwrap">
-                    <div id="bajs">
-                        <div id="eventTime">
-                            ${event.date} <br> ${event.starttid} - ${event.sluttid}
-                        </div>
-                        <div id="rubbeSec">
-                            <div id="eventRubrik">
-                                ${event.rubrik}
-                            </div>
-                            <div id="arrow">
-                                >
-                            </div>
-                        </div>
-                        <div id="merInfoDiv">
-                            ${event.merInfo}
-                        </div>
-                    </div>
-                </section>
-            </section>
-                `;
+                let clone = eventTemplate.content.cloneNode(true);
 
-                appendDay.appendChild(appendEvent);
+                // clone.getElementById("edit").classList.remove("hidden");
+                // let editSwitch = false;
+                // clone.getElementById("edit").addEventListener("click", (e) => {
+                //     if (editSwitch === false) {
+                //         let formClone = 
+                //     }
+                // }
+
+                clone.getElementById("eventTime").textContent = `${event.starttid} - ${event.sluttid}`;
+                
+                clone.getElementById("eventRubrik").textContent = `${event.rubrik}`;
+                clone.getElementById("merInfoDiv").textContent = ``;
+
+                let switchMerInfo = false;
+                clone.getElementById("arrow").addEventListener("click", (e) => {
+                    if (switchMerInfo === false) {
+                        e.target.style.transform = "rotate(90deg)";
+                        let InfoDiven = e.target.parentNode.nextSibling.nextSibling;
+                        InfoDiven.innerHTML = `<i>${event.merInfo}</i>`;
+                        InfoDiven.classList.remove("hidden");
+                        switchMerInfo = true;
+                    } else {
+                        e.target.style.transform = "rotate(0deg)";
+                        let InfoDiven = e.target.parentNode.nextSibling.nextSibling;
+                        InfoDiven.innerHTML = ``;
+                        InfoDiven.classList.add("hidden");
+                        switchMerInfo = false;
+                    }
+                })
+                
+                dayEvents.appendChild(clone);
             })
+            //     if (event.merInfo === undefined) {
+            //         event.merInfo = "Ingen kommentar";
+            //     }
+            //     let appendEvent = document.createElement("section");
+            //     appendEvent.id = "valdKategoriEventsSec";
+                
+            //     appendEvent.innerHTML = `
+            //     <section class="flex ettEvent" id="valdKategoriEvents">
+            //     <section id="linearwrap">
+            //         <div id="bajs">
+            //             <div id="eventTime">
+            //                 ${event.date} <br> ${event.starttid} - ${event.sluttid}
+            //             </div>
+            //             <div id="rubbeSec">
+            //                 <div id="eventRubrik">
+            //                     ${event.rubrik}
+            //                 </div>
+            //                 <div id="arrow">
+            //                     >
+            //                 </div>
+            //             </div>
+            //             <div id="merInfoDiv">
+            //                 ${event.merInfo}
+            //             </div>
+            //         </div>
+            //     </section>
+            // </section>
+            //     `;
+            //     appendDay.appendChild(appendEvent);
+            // })
         })
-
-        // eventsSorted.forEach(event => {
-        //     if (event.merInfo === undefined) {
-        //         event.merInfo = "Ingen kommentar";
-        //     }
-
-        //     let appendEvent = document.createElement("section");
-        //     appendEvent.id = "valdKategoriEventsSec";
-        //     appendEvent.innerHTML = `
-        //     <section class="flex" id="valdKategoriEvents">
-        //     <section id="linearwrap">
-        //         <div id="bajs">
-        //             <div id="eventTime">
-        //                 ${event.date} <br> ${event.starttid} - ${event.sluttid}
-        //             </div>
-        //             <div id="rubbeSec">
-        //                 <div id="eventRubrik">
-        //                     ${event.rubrik}
-        //                 </div>
-        //                 <div id="arrow">
-        //                     >
-        //                 </div>
-        //             </div>
-        //             <div id="merInfoDiv">
-        //                 ${event.merInfo}
-        //             </div>
-        //         </div>
-        //     </section>
-        // </section>
-        //     `;
-
-        //     document.getElementById("removehehe").appendChild(appendEvent);
-        // })
     });
 });
-
-
-
-// om månad börjar med en nolla - ta bort nolla - forsättning på set calenderFunktionerna =
-
-// let yesterdaySplitted = yesterday.split("-");
-//     if (yesterdaySplitted[1].indexOf(0) === 0) {
-//         let str = yesterdaySplitted[1];
-//         for (let i = 0; i < str.length; i++) {
-//             dates[0].textContent = yesterdaySplitted[2] + "/" + str[1];
-//         }
-//     } else {
-//         dates[0].textContent = yesterdaySplitted[2] + "/" + yesterdaySplitted[1];
-//     }
-
-//     let todaySplitted = today.split("-");
-//     if (todaySplitted[1].indexOf(0) === 0) {
-//         let str = todaySplitted[1];
-//         for (let i = 0; i < str.length; i++) {
-//             dates[1].textContent = todaySplitted[2] + "/" + str[1];
-//         }
-//     } else {
-//         dates[1].textContent = todaySplitted[2] + "/" + todaySplitted[1];
-//     }
-
-//     let tomorrowSplitted = tomorrow.split("-");
-//     if (tomorrowSplitted[1].indexOf(0) === 0) {
-//         let str = tomorrowSplitted[1];
-//         for (let i = 0; i < str.length; i++) {
-//             dates[2].textContent = tomorrowSplitted[2] + "/" + str[1];
-//         }
-//     } else {
-//         dates[2].textContent = tomorrowSplitted[2] + "/" + tomorrowSplitted[1];
-//     }
-
-
-
-
-
-// delete grej
-
-// document.getElementById("butt").addEventListener("click", () => {
-//     const options = {
-//         method: 'DELETE',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         }
-
-//     };
-//     fetch("/deleteAll", options);
-// })

@@ -5,9 +5,10 @@ const getAllEvents = (req, res) => {
     res.send({data: events});
 }
 
-const removeAllEvents = () => {
+const removeAllEvents = (req, res) => {
     EventModel.deleteAllEvents();
-    // res.send({data: events});
+
+    res.redirect('/html/enDag.html');
 }
 
 const updateEvent = (req, res) => {
@@ -52,7 +53,7 @@ const createEvent = (req, res) => {
     const success = EventModel.createEvent(body);
 
     if (success) {
-        res.status(201).json({message: 'event created'})
+        res.redirect('/html/enDag.html');
     } else {
         res.status(400).json({message: "event failed create"})
     };
