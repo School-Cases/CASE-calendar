@@ -111,30 +111,18 @@
                 <div class="dates">14/4</div>
                 <div class="veckodag tomorrowDay">Måndag</div>
                 <div class="enDagDagSecEventDiv">
-                    <!-- <div class="enDagAddEventButton">+</div> -->
                     <div class="EventsPerDay"></div>
-
                 </div>
             </div>
-
             <div class="enDagDagSec nästnästaDag">
                 <div class="dates">14/4</div>
                 <div class="veckodag toTomorrowDay">Måndag</div>
                 <div class="enDagDagSecEventDiv">
-                    <!-- <div class="enDagAddEventButton">+</div> -->
                     <div class="EventsPerDay"></div>
-
                 </div>
             </div>
-
-
         </section>
-
-
     </section>
-
-    <img src="" alt="">
-
 
     <template id="addEventTemplate">
         <section class="" id="addEventInputSec">
@@ -143,26 +131,14 @@
 
             <form action="/create" method="post">
                 <input type="text" name="date" class="hidden" id="dateöh">
-
                 <div id="inputRubbeDiv">
                     <input type="text" name="rubrik" id="inputRubbe" placeholder="Rubrik">
                 </div>
-
                 <div class="flex" id="tidSec">
                     <div id="tid">Tid:</div>
                     <input type="time" name="starttid" id="starttid">
                     <div id="öh">-</div><input type="time" name="sluttid" id="sluttid">
                 </div>
-                <!-- <div id="tidInputDiv">
-                    <label for="starttid">Starttid:</label>
-                    <input type="time" name="starttid" id="">
-                </div>
-
-                <div id="tidInputDiv">
-                    <label for="sluttid">Sluttid:</label>
-                    <input type="time" name="sluttid" id="">
-                </div> -->
-
                 <div id="kategoriRubbe">
                     Kategori:
                 </div>
@@ -185,18 +161,11 @@
                         <label id="asviktigtLabel" for="asviktigt">ASVIKTIGT</label>
                     </div>
                 </div>
-
                 <textarea name="merInfo" id="merInfoText" cols="28" rows="5" placeholder="Mer info"></textarea><br>
-
                 <div id="submitDiv"><input type="submit" value="ADD EVENT" id="submitButton"></div>
-
-
-
             </form>
-
         </section>
     </template>
-
 
     <template id="updateEventTemplate">
         <section class="" id="addEventInputSec">
@@ -204,14 +173,11 @@
             <div id="addEventRubbe">Event måndag 14/5</div>
             <div id="deleteDiv"><a id="delete" href="">Ta bort event</a></div>
 
-
             <form id="updateForm" method="post">
                 <input type="text" name="date" class="hidden" id="dateöh">
-
                 <div id="inputRubbeDiv">
                     <input type="text" name="rubrik" id="inputRubbe" placeholder="Rubrik">
                 </div>
-
                 <div class="flex" id="tidSec">
                     <div id="tid">Tid:</div>
                     <input type="time" name="starttid" id="starttid">
@@ -239,18 +205,11 @@
                         <label id="asviktigtLabel" for="asviktigt">ASVIKTIGT</label>
                     </div>
                 </div>
-
                 <textarea name="merInfo" id="merInfoText" cols="28" rows="5" placeholder="Mer info"></textarea><br>
-
                 <div id="submitDiv"><input type="submit" value="ADD EVENT" id="submitButton"></div>
-
-
-
             </form>
-
         </section>
     </template>
-
 
     <template id="eventTemplate">
         <section id="linearwrap">
@@ -267,11 +226,7 @@
                     <div id="rubbeBoll3" class=""></div>
                 </section>
                 <div id="rubbeSec">
-                    <!-- <section id="bollar" class="flex">
-                        <div id="rubbeBoll1" class=""></div>
-                        <div id="rubbeBoll2" class=""></div>
-                        <div id="rubbeBoll3" class=""></div>
-                    </section> -->
+                    
                     <div id="eventRubrik">
                         Bajsa
                     </div>
@@ -284,113 +239,10 @@
         </section>
     </template>
 
-
-    <!-- <input type="date" name="date" id="dateöh">
-    <button id="butt">
-        hej
-    </button> -->
-
-
-    <!-- till kategorisec -->
-    <!-- <template id="eventTemplateKategoriSec">
-        <section id="valdKategoriEventsSec">
-            <section class="flex" id="valdKategoriEvents">
-                <section id="linearwrap">
-                    <div id="bajs">
-                        <div id="eventTime">
-                            13:40 - 14:15
-                        </div>
-                        <div id="rubbeSec">
-                            <div id="eventRubrik">
-                                Bajsa
-                            </div>
-                            <div id="arrow">
-                                >
-                            </div>
-                        </div>
-                        <div id="merInfoDiv">
-                            hfakjfshjasf sajfalsjfaslf asjjs sjfajsf jajsajajlasj asd asd f f a
-                            aksfnasjkfajsfnaslfasfj
-                        </div>
-                    </div>
-                </section>
-            </section>
-        </section>
-    </template> -->
-
-
-
     <div class="flex" id="kategoriSecRubbe1"><div id="kategoriSecRubbe"></div></div>
     
-
     <section id="removehehe"></section>
 
-    <!-- <section id="valdKategoriEventsSec">
-            <section class="flex" id="valdKategoriEvents">
-                <section id="linearwrap">
-                    <div id="bajs">
-                        <div id="eventTime">
-                            13:40 - 14:15
-                        </div>
-                        <div id="rubbeSec">
-                            <div id="eventRubrik">
-                                Bajsa
-                            </div>
-                            <div id="arrow">
-                                >
-                            </div>
-                        </div>
-                        <div id="merInfoDiv">
-                            hfakjfshjasf sajfalsjfaslf asjjs sjfajsf jajsajajlasj asd asd f f a
-                            aksfnasjkfajsfnaslfasfj
-                        </div>
-                    </div>
-                </section>
-            </section>
-        </section> -->
-
-
-
-
-    <!-- till dagSec -->
-
-    <!-- <section id="valdKategoriEventsSec">
-        <div id="kategori">
-            Jobb
-        </div>
-        <section class="flex" id="valdKategoriEvents">
-            <section id="linearwrap">
-                <div id="bajs">
-                    <div id="eventTime">
-                        13:40 - 14:15
-                    </div>
-                    <div id="rubbeSec">
-                        <div id="rubbeBoll" class="röd">
-
-                        </div>
-                        <div id="eventRubrik">
-                            Bajsa
-                        </div>
-                        <div id="arrow">
-                            >
-                        </div>
-                    </div>
-                    <div id="merInfoDiv">
-                        hfakjfshjasf sajfalsjfaslf asjjs sjfajsf jajsajajlasj asd asd f f a
-                        aksfnasjkfajsfnaslfasfj
-                    </div>
-                </div>
-            </section>
-        </section>
-    </section> -->
-
-
-
     <script src="../js/enDag.js"></script>
-
-
-
-
 </body>
-
 </html>
