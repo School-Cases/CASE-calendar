@@ -8,7 +8,7 @@ import path from "path";
 
 
 const app = express();
-// let PORT = 3002;
+
 const PORT = process.env.PORT || 3002;
 
 
@@ -28,6 +28,12 @@ app.get('/deleteAll', EventController.removeAllEvents);
 app.get('/delete/:id', EventController.removeEventById);
 
 app.post('/update/:id', EventController.updateEvent);
+
+// app.get('/port', function(req, res){
+//     res.json({
+//         port: process.env.PORT
+//     });
+// });
 
 
 

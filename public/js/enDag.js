@@ -32,7 +32,7 @@ const editHover = () => {
 
 let editSwitch = false;
 const getTheEvents = () => {
-    fetch('http://localhost:3002/events').then((response) => response.json()).then((eventsS) => {
+    fetch('https://casekalender.herokuapp.com/events').then((response) => response.json()).then((eventsS) => {
         let events = eventsS.data;
         events = events.sort((a, b) => a.starttid.replace(":", "") - b.starttid.replace(":", ""));
         EventsPerDay.forEach(day => {
@@ -87,7 +87,7 @@ const getTheEvents = () => {
                         let formClone = updateEventTemplate.content.cloneNode(true);
                         theDay.children[2].appendChild(formClone);
                         // const closeButton = document.getElementById("closeButton");
-                        document.getElementById("delete").setAttribute("href", `http://localhost:3002/delete/${dayEvent.id}`)
+                        document.getElementById("delete").setAttribute("href", `https://casekalender.herokuapp.com/delete/${dayEvent.id}`)
 
 
                         addEventInput.style.padding = "0.3rem";
@@ -413,7 +413,7 @@ const kategoriSec = document.getElementById("kategoriSec");
 kategoriSec.addEventListener("click", (e) => {
     let chosenKat = e.target.textContent.trim();
 
-    fetch('http://localhost:3002/events').then((response) => response.json()).then((events) => {
+    fetch('https://casekalender.herokuapp.com/events').then((response) => response.json()).then((events) => {
         events = events.data;
 
         const kategoriSecRubbe1 = document.getElementById("kategoriSecRubbe1");
