@@ -1,5 +1,7 @@
 // variables
 
+
+
 const theDay = document.querySelector(".theDay");
 const eventTemplate = document.getElementById("eventTemplate");
 const addEventTemplate = document.getElementById("addEventTemplate");
@@ -368,7 +370,7 @@ const pilFram = document.getElementById("pilFram");
 pilFram.addEventListener("click", () => {
     setCalendarDatesFram();
     getTheEvents();
-    setDayHeight();
+    // setDayHeight();
     if (addSwitch === true) {
         document.getElementById("dateöh").value = today;
         document.getElementById("addEventRubbe").textContent = "Event " + today;
@@ -379,7 +381,7 @@ const pilBak = document.getElementById("pilBak");
 pilBak.addEventListener("click", () => {
     setCalendarDatesBak();
     getTheEvents();
-    setDayHeight();
+    // setDayHeight();
     if (addSwitch === true) {
         document.getElementById("dateöh").value = today;
         document.getElementById("addEventRubbe").textContent = "Event " + today;
@@ -390,7 +392,7 @@ const pilBakX7 = document.getElementById("pilBakX7");
 pilBakX7.addEventListener("click", () => {
     setCalendarDatesBakX7();
     getTheEvents();
-    setDayHeight();
+    // setDayHeight();
     if (addSwitch === true) {
         document.getElementById("dateöh").value = today;
         document.getElementById("addEventRubbe").textContent = "Event " + today;
@@ -401,7 +403,7 @@ const pilFramX7 = document.getElementById("pilFramX7");
 pilFramX7.addEventListener("click", () => {
     setCalendarDatesFramX7();
     getTheEvents();
-    setDayHeight();
+    // setDayHeight();
     if (addSwitch === true) {
         document.getElementById("dateöh").value = today;
         document.getElementById("addEventRubbe").textContent = "Event " + today;
