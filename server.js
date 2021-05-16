@@ -48,6 +48,6 @@ app.get("/haha", (req, res) => {
 // (ejs)
 
 
-app.listen(PORT, () => {
+app.listen(process.env.PORT, () => {
     console.log('im listening on port', PORT);
 });
