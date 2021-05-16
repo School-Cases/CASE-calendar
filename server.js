@@ -9,7 +9,7 @@ import path from "path";
 
 const app = express();
 // let PORT = 3002;
-const PORT = process.env.PORT;
+const PORT = 3002 || process.env.PORT;
 
 
 app.use(express.urlencoded());
@@ -37,10 +37,10 @@ app.post('/update/:id', EventController.updateEvent);
 
 // app.get('/deleteOne/:id', EventController.removeEventById);
 
-app.get("/haha", (req, res) => {
+app.get("/", (req, res) => {
     // servera html
     // och app.js
-    res.end("hej");
+    res.sendFile("enDag.html", { root: './public/html' });
 
 })
 
