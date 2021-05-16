@@ -9,7 +9,7 @@ import path from "path";
 
 const app = express();
 // let PORT = 3002;
-const PORT = 3002 || process.env.PORT;
+const PORT = process.env.PORT || 3002;
 
 
 app.use(express.urlencoded());
