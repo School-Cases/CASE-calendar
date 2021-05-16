@@ -35,6 +35,8 @@ app.post('/update/:id', EventController.updateEvent);
 //     });
 // });
 
+// EventController.removeAllEvents;
+
 
 
 // EventController.removeAllEvents();
