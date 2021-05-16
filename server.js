@@ -8,8 +8,8 @@ import path from "path";
 
 
 const app = express();
-const PORT = 3002;
-
+// let PORT = 3002;
+const PORT = process.env.PORT;
 
 
 app.use(express.urlencoded());
@@ -48,6 +48,6 @@ app.get("/haha", (req, res) => {
 // (ejs)
 
 
-app.listen(process.env.PORT, () => {
+app.listen(PORT, () => {
     console.log('im listening on port', PORT);
 });
