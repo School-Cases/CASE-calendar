@@ -34,7 +34,8 @@ const editHover = () => {
 
 let editSwitch = false;
 const getTheEvents = () => {
-    fetch('https://casekalender.herokuapp.com/events').then((response) => response.json()).then((eventsS) => {
+    // https://casekalender.herokuapp.com/events
+    fetch('http://localhost:3002/events').then((response) => response.json()).then((eventsS) => {
         let events = eventsS.data;
         events = events.sort((a, b) => a.starttid.replace(":", "") - b.starttid.replace(":", ""));
         EventsPerDay.forEach(day => {
@@ -89,7 +90,8 @@ const getTheEvents = () => {
                         let formClone = updateEventTemplate.content.cloneNode(true);
                         theDay.children[2].appendChild(formClone);
                         // const closeButton = document.getElementById("closeButton");
-                        document.getElementById("delete").setAttribute("href", `https://casekalender.herokuapp.com/delete/${dayEvent.id}`)
+                        // https://casekalender.herokuapp.com/events
+                        document.getElementById("delete").setAttribute("href", `http://localhost:3002/delete/${dayEvent.id}`)
 
 
                         addEventInput.style.padding = "0.3rem";
@@ -359,7 +361,6 @@ enDagAddEventButton.addEventListener("click", (e) => {
             switchBlackWhite.style.backgroundColor = "rgb(48, 47, 47)";
             switchBlackWhite.style.height = "51.2vh";
             enDagAddEventButton.style.visibility = "visible";
-            // setDayHeight();
         })
     } else {
         return;
@@ -370,7 +371,6 @@ const pilFram = document.getElementById("pilFram");
 pilFram.addEventListener("click", () => {
     setCalendarDatesFram();
     getTheEvents();
-    // setDayHeight();
     if (addSwitch === true) {
         document.getElementById("dateöh").value = today;
         document.getElementById("addEventRubbe").textContent = "Event " + today;
@@ -381,7 +381,6 @@ const pilBak = document.getElementById("pilBak");
 pilBak.addEventListener("click", () => {
     setCalendarDatesBak();
     getTheEvents();
-    // setDayHeight();
     if (addSwitch === true) {
         document.getElementById("dateöh").value = today;
         document.getElementById("addEventRubbe").textContent = "Event " + today;
@@ -392,7 +391,6 @@ const pilBakX7 = document.getElementById("pilBakX7");
 pilBakX7.addEventListener("click", () => {
     setCalendarDatesBakX7();
     getTheEvents();
-    // setDayHeight();
     if (addSwitch === true) {
         document.getElementById("dateöh").value = today;
         document.getElementById("addEventRubbe").textContent = "Event " + today;
@@ -403,7 +401,6 @@ const pilFramX7 = document.getElementById("pilFramX7");
 pilFramX7.addEventListener("click", () => {
     setCalendarDatesFramX7();
     getTheEvents();
-    // setDayHeight();
     if (addSwitch === true) {
         document.getElementById("dateöh").value = today;
         document.getElementById("addEventRubbe").textContent = "Event " + today;
@@ -414,8 +411,8 @@ pilFramX7.addEventListener("click", () => {
 const kategoriSec = document.getElementById("kategoriSec");
 kategoriSec.addEventListener("click", (e) => {
     let chosenKat = e.target.textContent.trim();
-
-    fetch('https://casekalender.herokuapp.com/events').then((response) => response.json()).then((events) => {
+// https://casekalender.herokuapp.com/events
+    fetch('http://localhost:3002/events').then((response) => response.json()).then((events) => {
         events = events.data;
 
         const kategoriSecRubbe1 = document.getElementById("kategoriSecRubbe1");
