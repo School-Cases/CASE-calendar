@@ -17,4 +17,4 @@ Ett event ska innehålla:
 Applikationen ska kunna:
 * Spara eventen till fil(er)
 ---
-Note: My first project using Node.js
+Note: My first project using Node.js.
