@@ -2,6 +2,10 @@
 (school case)
 
 ---
+
+Uppgift:
+* Make a calendar.
+
 Krav:
 
 En användare ska kunna:
